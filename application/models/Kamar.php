@@ -65,7 +65,7 @@ class Kamar extends CI_Model {
                     INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar='$kamar'"); 
-        return $query;            
+        return $query;     
     }
 }
 ?>

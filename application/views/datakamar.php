@@ -127,7 +127,7 @@
                     }
                   ?>
                 <td>
-                  <a href="admin_lihatdatakamar.php?id=<?php echo $row['id_kamar']; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">View</button></a>
+                  <a href="admin_lihatdatakamar.php?id=<?php echo $row->id_kamar; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">View</button></a>
                 </td>
                 </tr>
                 <?php

@@ -286,7 +286,6 @@ class Tes extends CI_Controller {
 		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
 		$data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();	
 		$this->load->view('hasiltes', $data);
-
 		$this->output->enable_profiler(TRUE);
 	}  
 	
