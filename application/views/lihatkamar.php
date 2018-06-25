@@ -31,7 +31,7 @@
         </div>
       </div>
       <!--Menu Sidenav-->
-      <li class="white"><a href="<?php echo site_url();?>/home/datakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/tes/lihatdatakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
       <li class="active"><a href="#"><i class="material-icons">content_paste</i>Lihat Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/home/user_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
@@ -48,7 +48,12 @@
         <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
         <p><?php echo $row->nama_gedung;?></p>
         <p>Lantai <?php $string= $row->nama_kamar; echo $firstCharacter=$string[0];?></p>
+<<<<<<< HEAD
         <p>Kamar <?php echo $kamar = $row->nama_kamar;?></p>
+=======
+        <p>Kamar <?php echo $row->nama_kamar;
+                       $result['kamar'] = $row->nama_kamar;?></p> 
+>>>>>>> 712146fd46749760874b2ff2438492730131f8f3
         <?php }?>
         <table class="responsive-table">
           <thead>
