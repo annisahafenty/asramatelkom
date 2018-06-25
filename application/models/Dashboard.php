@@ -1,9 +1,12 @@
 <?php
-class Admin extends CI_Model {
+class Dashboard extends CI_Model {
 
     public function get_datagedung(){
-        // $query = $this->db->query("SELECT COUNT(id_gedung) FROM tbgedung");
-        // return $query;
+        if ($perempuan) {
+            $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Perempuan'");
+          } else {
+            $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Laki-Laki'");
+          }
     }
 
     public function get_datakamar(){

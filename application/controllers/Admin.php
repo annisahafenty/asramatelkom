@@ -11,8 +11,8 @@ class Admin extends CI_Controller {
     }    
 
     public function datagedung(){
-        $this->load->model('admin');
-        $data['tbgedung'] = $this->admin->get_datagedung()->result();	
+        $this->load->model('dashboard');
+        $data['tbgedung'] = $this->dashboard->get_datagedung()->result();	
 		$this->load->view('datagedung', $data);
     }
 
@@ -21,8 +21,8 @@ class Admin extends CI_Controller {
     }    
 
     public function datapenghuni(){
-        $this->load->model('admin');
-        $data['penghuni'] = $this->admin->get_datapenghuni()->result();	
+        $this->load->model('dashboard');
+        $data['penghuni'] = $this->dashboard->get_datapenghuni()->result();	
 		$this->load->view('datapenghuni', $data);
     }    
 
