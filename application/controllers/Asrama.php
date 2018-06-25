@@ -9,16 +9,21 @@ class Asrama extends CI_Controller {
     }
 
     public function lihatkamar(){
+      $id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
+      $id_kamar = '23';
+      $id_kamars = $this->Kamar->lihatkamar();
+      // foreach ($id_kamars as $id) {
+      //   $id_kamar = $id->id_kamar;
+      // }
 
-      $data['kamar'] = $this->Kamar->lihatkamar();
-      $data['isi_kamar'] = $this->Kamar->lihat_isikamar();
+      $data['isi_kamar'] = $this->Kamar->lihat_isikamar($id_kamar);
       $this->output->enable_profiler(TRUE);
       $this->load->view('lihatkamar', $data);
     }
 
     public function pengelompokan(){
-		$id_mahasiswa = $_SESSION['id_mahasiswa'];
-		$tipe_kepribadian = $_SESSION['tipe_kepribadian'];
+		$id_mahasiswa = $this->session->userdata['login']['id_mahasiswa'];
+		$tipe_kepribadian = $this->session->userdata('tipe_kepribadian');
 		$jenis_kelamin = $_SESSION['jenis_kelamin'];
         $this->load->model('kamar');
 		$result_kamar = $this->kamar->get_datakamar();
