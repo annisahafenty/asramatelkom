@@ -42,21 +42,14 @@
       <div class="section no-pad-bot" id="index-banner">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
         <?php
-        $qry = "SELECT * FROM tbpenghuni
-                INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
-                INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
-                INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar
-                INNER JOIN tbgedung ON tbgedung.id_gedung = tbkamar.id_gedung WHERE tbpenghuni.id_penghuni=$id_penghuni";
-        $result = mysqli_query($db, $qry);
-        $row = mysqli_fetch_assoc($result);
-        $kamar=$row['id_kamar'];
-
-
+        foreach($tbkamar as $row) {        
+          
         ?>
-        <h3>Kamar <?php echo substr($row['nama_gedung'],7,8);?>-<?php echo $row['nama_kamar'];?></h3>
-        <p><?php echo $row['nama_gedung'];?></p>
-        <p>Lantai <?php $string= $row['nama_kamar']; echo $firstCharacter=$string[0];?></p>
-        <p>Kamar <?php echo $row['nama_kamar'];?></p>
+        <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
+        <p><?php echo $row->nama_gedung;?></p>
+        <p>Lantai <?php $string= $row->nama_kamar; echo $firstCharacter=$string[0];?></p>
+        <p>Kamar <?php echo $kamar = $row->nama_kamar;?></p>
+        <?php }?>
         <table class="responsive-table">
           <thead>
             <tr>
@@ -70,19 +63,18 @@
 
           <tbody>
             <?php
-            $querylist = mysqli_query($db,"SELECT * FROM tbpenghuni
-                    INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
-                    INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
-                    INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar=$kamar");
+            $this->load->kamar();
+            $this->kamar->lihat_isikamar($kamar);
+            
             $no = 1;
-            while($rowlist = mysqli_fetch_array($querylist))
+            foreach($tbisikamar as $row)
             {
             ?>
-            <td><?php echo $rowlist['nama_penghuni'];?></td>
-            <td><?php echo $rowlist['kota'];?></td>
-            <td><?php echo $rowlist['program_studi'];?></td>
-            <td><?php echo $rowlist['nomor_hp'];?></td>
-            <td><?php echo $rowlist['tipe_kepribadian'];?></td>
+            <td><?php echo $row->nama_penghuni;?></td>
+            <td><?php echo $row->kota;?></td>
+            <td><?php echo $row->program_studi;?></td>
+            <td><?php echo $row->nomor_hp;?></td>
+            <td><?php echo $row->tipe_kepribadian;?></td>
 
             </tr>
             <?php
