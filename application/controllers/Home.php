@@ -14,12 +14,12 @@ class Home extends CI_Controller {
 	public function loginadmin(){
 		$this->load->view('loginadmin');
 	}
-	
+
 	public function admin_login(){
 		$username = $this->input->post('username');
-		$password = $this->input->post('password');	
+		$password = $this->input->post('password');
 		$this->load->model('user');
-		$query = $this->user->get_admin($username, $password);
+		$query = $this->dashboard->get_admin($username, $password);
 		if($query->num_rows()>0){
 			$newdata = array(
 				'username'  => $username,
@@ -37,12 +37,12 @@ class Home extends CI_Controller {
 	public function admin_logout(){
 		$this->session->sess_destroy();
 		redirect('home/loginadmin');
-	}		
+	}
 
 	public function user_login(){
 		$this->output->enable_profiler(TRUE);
 		$username = $this->input->post('username');
-		$password = $this->input->post('password');			
+		$password = $this->input->post('password');
 		//$query = $this->db->query("SELECT * FROM tbpenghuni WHERE username = '$username' AND password = '$password'");
 		$this->load->model('user');
 		$query = $this->user->get_user($username, $password);
@@ -68,11 +68,11 @@ class Home extends CI_Controller {
 			);
 			$this->session->set_userdata('login',$newdata);
 			$this->load->view('indextes');
-		}else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){	
-			$this->session->set_userdata($newdata);	
-			redirect('asrama/lihatkamar');		
+		}else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){
+			$this->session->set_userdata($newdata);
+			redirect('asrama/lihatkamar');
 		}else{
-			$this->session->set_flashdata('warning', 'gagal');			
+			$this->session->set_flashdata('warning', 'gagal');
 
 			redirect('home/login');
 		}
@@ -81,6 +81,6 @@ class Home extends CI_Controller {
 	public function user_logout(){
 		$this->session->sess_destroy();
 		redirect('home');
-	}		
+	}
 }
 ?>
