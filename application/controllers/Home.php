@@ -40,10 +40,8 @@ class Home extends CI_Controller {
 			);
 			$this->session->set_userdata($newdata);
 			$this->load->view('indextes');
-			// redirect('tes/indextes');
 		}else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){	
-			$this->session->set_userdata($newdata);				
-			// $this->load->view('lihatkamar');
+			$this->session->set_userdata($newdata);	
 			redirect('asrama/lihatkamar');		
 		}else{
 			$this->session->set_flashdata('warning', 'gagal');			
