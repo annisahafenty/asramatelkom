@@ -8,7 +8,7 @@ class Asrama extends CI_Controller {
 		$this->load->model('kamar');
 
 		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
-		$data['tbisikamar'] = $this->kamar->lihat_isikamar()->result();
+		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();
 		
 		$this->load->view('lihatkamar', $data);
     }
