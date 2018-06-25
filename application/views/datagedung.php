@@ -70,21 +70,21 @@
               </thead>
               <tbody>
                 <?php
-                if (isset($_GET['perempuan'])) {
-                  $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Perempuan'");
-                }else{
-                  $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Laki-Laki'");
-                }
+                // if (isset($_GET['perempuan'])) {
+                //   $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Perempuan'");
+                // }else{
+                //   $query_data_gedung = mysqli_query($db,"SELECT * FROM tbgedung WHERE tipe_gedung='Asrama Laki-Laki'");
+                // }
                 $no = 1;
                 $numbering=1;
-                while($row = mysqli_fetch_array($query_data_gedung))
+                foreach($gedung as $row)
                 {
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
-                <td><?php echo $row['nama_gedung'];?></td>
-                <td><?php echo $row['tipe_gedung'];?></td>
+                <td><?php echo $row->nama_gedung;?></td>
+                <td><?php echo $row->tipe_gedung;?></td>
                 <td>
-                  <a href="admin_editdatagedung.php?id=<?php echo $row['id_gedung']; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Edit</button></a>
+                  <a href="admin_editdatagedung.php?id=<?php echo $row->id_gedung; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Edit</button></a>
                 </td>
                 </tr>
                 <?php

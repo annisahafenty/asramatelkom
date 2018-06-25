@@ -74,23 +74,23 @@
               </thead>
               <tbody>
                 <?php
-                if (isset($_GET['perempuan'])) {
-                  $query_data_kamar = mysqli_query($db,"SELECT tbkamar.nama_kamar, tbgedung.nama_gedung, tbkamar.id_kamar, COUNT(tbisikamar.id_kamar) AS total FROM tbkamar JOIN tbgedung ON tbkamar.id_gedung=tbgedung.id_gedung LEFT JOIN tbisikamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbgedung.tipe_gedung='Asrama Perempuan' GROUP BY tbkamar.id_kamar ORDER BY tbkamar.id_kamar ASC");
-                }else{
-                  $query_data_kamar = mysqli_query($db,"SELECT tbkamar.nama_kamar, tbgedung.nama_gedung, tbkamar.id_kamar, COUNT(tbisikamar.id_kamar) AS total FROM tbkamar JOIN tbgedung ON tbkamar.id_gedung=tbgedung.id_gedung LEFT JOIN tbisikamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbgedung.tipe_gedung='Asrama Laki-Laki' GROUP BY tbkamar.id_kamar ORDER BY tbkamar.id_kamar ASC");
-                }
+                // if (isset($_GET['perempuan'])) {
+                //   $query_data_kamar = mysqli_query($db,"SELECT tbkamar.nama_kamar, tbgedung.nama_gedung, tbkamar.id_kamar, COUNT(tbisikamar.id_kamar) AS total FROM tbkamar JOIN tbgedung ON tbkamar.id_gedung=tbgedung.id_gedung LEFT JOIN tbisikamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbgedung.tipe_gedung='Asrama Perempuan' GROUP BY tbkamar.id_kamar ORDER BY tbkamar.id_kamar ASC");
+                // }else{
+                //   $query_data_kamar = mysqli_query($db,"SELECT tbkamar.nama_kamar, tbgedung.nama_gedung, tbkamar.id_kamar, COUNT(tbisikamar.id_kamar) AS total FROM tbkamar JOIN tbgedung ON tbkamar.id_gedung=tbgedung.id_gedung LEFT JOIN tbisikamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbgedung.tipe_gedung='Asrama Laki-Laki' GROUP BY tbkamar.id_kamar ORDER BY tbkamar.id_kamar ASC");
+                // }
 
                 $no = 1;
                 $numbering=1;
 
-                while($row=mysqli_fetch_array($query_data_kamar))
+                foreach($kamar as $row)
                 {
-                $id_kamar=$row['id_kamar'];
+                $id_kamar = $row->id_kamar;
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
-                <td><?php echo $row['nama_gedung'];?></td>
-                <td><?php echo $row['nama_kamar'];?></td>
-                <td><?php echo $row['total'];?>/4</td>
+                <td><?php echo $row->nama_gedung;?></td>
+                <td><?php echo $row->nama_kamar;?></td>
+                <td><?php echo $row->total;?>/4</td>
                 <?php
                     $query_bobot=mysqli_query($db,"SELECT
                     SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'SF' then 1 else 0 end) as SF,

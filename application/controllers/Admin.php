@@ -12,12 +12,14 @@ class Admin extends CI_Controller {
 
     public function datagedung(){
         $this->load->model('dashboard');
-        $data['tbgedung'] = $this->dashboard->get_datagedung()->result();	
+        $data['gedung'] = $this->dashboard->get_datagedung()->result();	
 		$this->load->view('datagedung', $data);
     }
 
     public function datakamar(){
-        $this->load->view('datakamar');
+        $this->load->model('dashboard');
+        $data['kamar'] = $this->dashboard->get_datakamar()->result();	
+		$this->load->view('datakamar', $data);
     }    
 
     public function datapenghuni(){
