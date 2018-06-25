@@ -34,7 +34,7 @@ class Kamar extends CI_Model {
     public function cek_kriteria($tipekepribadian_penghuni){
         $tipe_kepribadian = $_SESSION['tipe_kepribadian'];
         $query = $this->db->query("SELECT * FROM tbkriteria k WHERE k.kriteria1 LIKE SUBSTR('$tipe_kepribadian',2,2) AND k.kriteria2 IN
-            (SELECT SUBSTR('$tipekepribadian_penghuni',2,2) FROM tbisikamar i JOIN tbhasiltes h ON  i.id_penghuni = h.id_penghuni WHERE i.id_kamar = '$id_kamar_isi_kamar'");
+            (SELECT SUBSTR('$tipekepribadian_penghuni',2,2) FROM tbisikamar i JOIN tbhasiltes h ON  i.id_penghuni = h.id_penghuni WHERE i.id_kamar = '$id_kamar_isi_kamar')");
         return $query;
     }
 
@@ -57,7 +57,7 @@ class Kamar extends CI_Model {
                     INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar
                     INNER JOIN tbgedung ON tbgedung.id_gedung = tbkamar.id_gedung WHERE tbpenghuni.id_penghuni='$id_mahasiswa'");
-        return $query;        
+        return $query;
     }
 
     public function lihat_isikamar($kamar){
@@ -65,7 +65,7 @@ class Kamar extends CI_Model {
                     INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar=$kamar");
-        return $query;            
+        return $query;
     }
 }
 ?>

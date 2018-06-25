@@ -2,18 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Asrama extends CI_Controller {
-    public function lihatkamar(){
-		
-		$this->output->enable_profiler(TRUE);
-		$this->load->model('kamar');
+    function __construct(){
+      parent::__construct();
+      $this->load->model('Kamar');
 
-		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
-		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();
-		
-		$this->load->view('lihatkamar', $data);
     }
 
-    public function pengelompokan(){		
+    public function lihatkamar(){
+
+      $data['kamar'] = $this->Kamar->lihatkamar();
+      $data['isi_kamar'] = $this->Kamar->lihat_isikamar();
+      $this->output->enable_profiler(TRUE);
+      $this->load->view('lihatkamar', $data);
+    }
+
+    public function pengelompokan(){
 		$id_mahasiswa = $_SESSION['id_mahasiswa'];
 		$tipe_kepribadian = $_SESSION['tipe_kepribadian'];
 		$jenis_kelamin = $_SESSION['jenis_kelamin'];
@@ -27,7 +30,7 @@ class Asrama extends CI_Controller {
         		foreach($result_kamar_perempuan->result_array() as $row_kamar_perempuan){
               		$jml_cek=0;
               		$jml_kriteria=0;
-					$id_kamar_perempuan = $row_kamar_perempuan['id_kamar'];		
+					$id_kamar_perempuan = $row_kamar_perempuan['id_kamar'];
 
 					$result_isi_kamar = $this->kamar->get_datakamarperempuan_isikamar($id_kamar_perempuan);
               		$jml_orang = $result_isi_kamar->num_rows();
@@ -35,20 +38,20 @@ class Asrama extends CI_Controller {
                 	if ($is_penghuni > 0 && $is_penghuni < 4){
                   		foreach($result_isi_kamar->result_array() as $row_isi_kamar){
                     		$id_kamar_isi_kamar = $row_isi_kamar['id_kamar'];
-							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];							
+							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];
 
                             //QUERY LOOPING PENGHUNI
 							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
 							$row_hasil_tes = $result_hasil_tes->result();
 							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
-							
+
 							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
 
                     		foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
                       			$jml_cek++;
 					  			$jml_kriteria=$jml_kriteria+$is_kriteria;
-					  
+
                       			if($jml_kriteria==0 && $jml_orang==$jml_cek){
                         			break 2;
                       			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
@@ -67,7 +70,7 @@ class Asrama extends CI_Controller {
                    		continue;
                 	}
 				}
-				
+
 
 			}else{
 				$result_kamar_laki = $this->kamar->get_datakamarlakilaki();
@@ -75,7 +78,7 @@ class Asrama extends CI_Controller {
 				foreach($result_kamar_laki->result_array() as $row_kamar_laki){
             		$jml_cek=0;
             		$jml_kriteria=0;
-					$id_kamar_laki = $row_kamar_laki['id_kamar'];				
+					$id_kamar_laki = $row_kamar_laki['id_kamar'];
 
 					$result_isi_kamar = $this->kamar->get_datakamarlaki_isikamar($id_kamar_laki);
 					$jml_orang = $result_isi_kamar->num_rows();
@@ -84,7 +87,7 @@ class Asrama extends CI_Controller {
 
                 		foreach($result_isi_kamar->result_array() as $row_isi_kamar){
 							$id_kamar_isi_kamar = $row_isi_kamar['id_kamar'];
-							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];							
+							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];
 
 							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
 							$row_hasil_tes = $result_hasil_tes->result();
@@ -103,7 +106,7 @@ class Asrama extends CI_Controller {
                     			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
 									$input = $this->kamar->input_penghunilaki($id_kamar_laki);
 									break 3; //EVALUASI
-                    			}else{                      
+                    			}else{
                       				break ; //EVALUASI
                     			}
                 			} //end while kecocokan
@@ -121,7 +124,7 @@ class Asrama extends CI_Controller {
   			echo "0 results";
 		}
 
-		redirect('asrama/lihatkamar');	
+		redirect('asrama/lihatkamar');
     }
 }
 
