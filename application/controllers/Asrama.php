@@ -5,7 +5,12 @@ class Asrama extends CI_Controller {
     public function lihatkamar(){
 		
 		$this->output->enable_profiler(TRUE);
-		$this->load->view('lihatkamar');
+		$this->load->model('kamar');
+
+		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
+		$data['tbisikamar'] = $this->kamar->lihat_isikamar()->result();
+		
+		$this->load->view('lihatkamar', $data);
     }
 
     public function pengelompokan(){		
@@ -15,48 +20,39 @@ class Asrama extends CI_Controller {
         $this->load->model('kamar');
 		$result_kamar = $this->kamar->get_datakamar();
 
-		if(mysqli_num_rows($result_kamar) > 0){
+		if($result_kamar->num_rows() > 0 ){
 
 			if ($jenis_kelamin=='Perempuan'){
-                // $this->load->model('kamar');
     			$result_kamar_perempuan = $this->kamar->get_datakamarperempuan();
-
-        		while($row_kamar_perempuan = mysqli_fetch_assoc($result_kamar_perempuan)){
-					// $this->load->model('kamar');
+        		foreach($result_kamar_perempuan->result_array() as $row_kamar_perempuan){
               		$jml_cek=0;
               		$jml_kriteria=0;
-					$id_kamar_perempuan = $row_kamar_perempuan['id_kamar'];
-					
+					$id_kamar_perempuan = $row_kamar_perempuan['id_kamar'];		
 
-                    //GET DATA DARI TBISIKAMAR DIMANA KAMAR DI TBISIKAMAR = IDKAMAR YANG ADA DI TBKAMAR                    
-					$result_isi_kamar = $this->kamar->get_datakamarperempuan_isikamar();
-              		$jml_orang = mysqli_num_rows($result_isi_kamar);
-              		$is_penghuni = mysqli_num_rows($result_isi_kamar);
+					$result_isi_kamar = $this->kamar->get_datakamarperempuan_isikamar($id_kamar_perempuan);
+              		$jml_orang = $result_isi_kamar->num_rows();
+              		$is_penghuni = $result_isi_kamar->num_rows();
                 	if ($is_penghuni > 0 && $is_penghuni < 4){
-
-                  		while($row_isi_kamar = mysqli_fetch_assoc($result_isi_kamar)){
-							// $this->load->model('kamar');
+                  		foreach($result_isi_kamar->result_array() as $row_isi_kamar){
                     		$id_kamar_isi_kamar = $row_isi_kamar['id_kamar'];
 							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];							
 
                             //QUERY LOOPING PENGHUNI
-							$result_hasil_tes = $this->kamar->get_penghuniisikamar();
-                    		$row_hasil_tes = mysqli_fetch_array($result_hasil_tes);
+							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
+							$row_hasil_tes = $result_hasil_tes->result();
 							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
 							
-							$result_cek = $this->kamar->cek_kriteria();
+							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
 
-                    		while($row_cek = mysqli_fetch_array($result_cek)){
+                    		foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
                       			$jml_cek++;
 					  			$jml_kriteria=$jml_kriteria+$is_kriteria;
 					  
-                      			//kalau kondisinya kriteria 0 dan udh gaada yg dicek
                       			if($jml_kriteria==0 && $jml_orang==$jml_cek){
                         			break 2;
                       			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
-                                    // $this->load->model('kamar');
-									$input = $this->kamar->input_penghuniperempuan();
+									$input = $this->kamar->input_penghuniperempuan($id_kamar_perempuan);
                         			break 3; //EVALUASI
                     			}else{
                         			break ; //EVALUASI
@@ -65,44 +61,38 @@ class Asrama extends CI_Controller {
                 		} //end while cek jumlah penghuni
             		}
         			if($is_penghuni == 0 ){
-                        // $this->load->model('kamar');
-						$input = $this->kamar->input_penghuniperempuan();
+						$input = $this->kamar->input_penghuniperempuan($id_kamar_perempuan);
                 		break; //evaluasi aja
               		}else{
                    		continue;
                 	}
-        		}
+				}
+				
 
 			}else{
-				// $this->load->model('kamar');
 				$result_kamar_laki = $this->kamar->get_datakamarlakilaki();
 
-      			while($row_kamar_laki = mysqli_fetch_assoc($result_kamar_laki)){
-					// $this->load->model('kamar');
+				foreach($result_kamar_laki->result_array() as $row_kamar_laki){
             		$jml_cek=0;
             		$jml_kriteria=0;
-					$id_kamar_laki = $row_kamar_laki['id_kamar'];					
+					$id_kamar_laki = $row_kamar_laki['id_kamar'];				
 
-					//GET DATA DARI TBISIKAMAR DIMANA KAMAR DI TBISIKAMAR = IDKAMAR YANG ADA DI TBKAMAR
-					$result_isi_kamar = $this->kamar->get_datakamarlaki_isikamar();
-					$jml_orang = mysqli_num_rows($result_isi_kamar);
-					$is_penghuni = mysqli_num_rows($result_isi_kamar);
+					$result_isi_kamar = $this->kamar->get_datakamarlaki_isikamar($id_kamar_laki);
+					$jml_orang = $result_isi_kamar->num_rows();
+              		$is_penghuni = $result_isi_kamar->num_rows();
 					if ($is_penghuni > 0 && $is_penghuni < 4){
 
-                		while($row_isi_kamar = mysqli_fetch_assoc($result_isi_kamar)){
-							// $this->load->model('kamar');
-
+                		foreach($result_isi_kamar->result_array() as $row_isi_kamar){
 							$id_kamar_isi_kamar = $row_isi_kamar['id_kamar'];
 							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];							
 
-							//QUERY LOOPING PENGHUNI
-							$result_hasil_tes = $this->kamar->get_penghuniisikamar();
-							$row_hasil_tes = mysqli_fetch_array($result_hasil_tes);
+							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
+							$row_hasil_tes = $result_hasil_tes->result();
 							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
 
-							$result_cek = $this->kamar->cek_kriteria();
+							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
 
-                  			while($row_cek = mysqli_fetch_array($result_cek)){
+							foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
 								$jml_cek++;
 								$jml_kriteria=$jml_kriteria+$is_kriteria;
@@ -111,8 +101,7 @@ class Asrama extends CI_Controller {
 								if($jml_kriteria==0 && $jml_orang==$jml_cek){
                       				break 2;
                     			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
-									// $this->load->model('kamar');
-									$input = $this->kamar->input_penghunilaki();
+									$input = $this->kamar->input_penghunilaki($id_kamar_laki);
 									break 3; //EVALUASI
                     			}else{                      
                       				break ; //EVALUASI
@@ -121,8 +110,7 @@ class Asrama extends CI_Controller {
               			} //end while cek jumlah penghuni
             		}
 					if($is_penghuni == 0 ){
-						// $this->load->model('kamar');
-						$input = $this->kamar->input_penghunilaki();
+						$input = $this->kamar->input_penghunilaki($id_kamar_laki);
 						break; //evaluasi aja
             		}else{
                  		continue;
