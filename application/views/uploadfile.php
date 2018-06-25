@@ -85,18 +85,18 @@
       </div>
     </div>
       <!-- SCRIPT ZOOM PICTURE -->
-<script>
-   document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems, options);
-  });
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.materialboxed');
+        var instances = M.Materialbox.init(elems, options);
+    });
 
-  // Or with jQuery
+    // Or with jQuery
 
-  $(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
-</script>
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+    });
+    </script>
   </main>
 </body>
 </html>

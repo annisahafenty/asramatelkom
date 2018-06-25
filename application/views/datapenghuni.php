@@ -67,29 +67,25 @@
                   <th>Program Studi</th>
                   <th>Nomor Hp</th>
                   <th>Kota</th>
-                  <th>Provinsi</th>
                   <th>Tipe Kepribadian</th>
-                  <!--<th>Substring</th> -->
                 </tr>
               </thead>
               <tbody>
-                <?php
-                $qry = mysqli_query($db,"SELECT * FROM tbpenghuni LEFT JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni");
+                <?php                
                 $no = 1;
                 $numbering=1;
 
-                while($row = mysqli_fetch_array($qry))
+                foreach($penghuni as $row)
+                
                 {
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
-                <td><?php echo $row['nama_penghuni'];?></td>
-                <td><?php echo $row['jenis_kelamin'];?></td>
-                <td><?php echo $row['program_studi'];?></td>
-                <td><?php echo $row['nomor_hp'];?></td>
-                <td><?php echo $row['kota'];?></td>
-                <td><?php echo $row['provinsi'];?></td>
-                <td><?php echo $row['tipe_kepribadian'];?></td>
-                <!-- <td><?php echo substr($row['tipe_kepribadian'],1,2);?></td> -->
+                <td><?php echo $row->nama_penghuni;?></td>
+                <td><?php echo $row->jenis_kelamin;?></td>
+                <td><?php echo $row->program_studi;?></td>
+                <td><?php echo $row->nomor_hp;?></td>
+                <td><?php echo $row->kota;?></td>
+                <td><?php echo $row->tipe_kepribadian;?></td>
                 </tr>
                 <?php
                   $no++;

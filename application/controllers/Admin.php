@@ -11,7 +11,9 @@ class Admin extends CI_Controller {
     }    
 
     public function datagedung(){
-        $this->load->view('datagedung');
+        $this->load->model('admin');
+        $data['tbgedung'] = $this->admin->get_datagedung()->result();	
+		$this->load->view('datagedung', $data);
     }
 
     public function datakamar(){
@@ -19,21 +21,17 @@ class Admin extends CI_Controller {
     }    
 
     public function datapenghuni(){
-        $this->load->view('datapenghuni');
+        $this->load->model('admin');
+        $data['penghuni'] = $this->admin->get_datapenghuni()->result();	
+		$this->load->view('datapenghuni', $data);
     }    
 
     public function detailnilai(){
         $this->load->view('detailnilai');
     }    
-
-	public function get_datagedung(){
-		$this->load->model('admin');
-        $data['tbgedung'] = $this->admin->get_datagedung()->result();	
-		$this->load->view('dashboard', $data);
-    }	
     
     public function upload_file(){
         $this->load->view('uploadfile');
-    }
+    }    
 }
 ?>
