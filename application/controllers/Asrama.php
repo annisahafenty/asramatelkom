@@ -5,18 +5,18 @@ class Asrama extends CI_Controller {
 	public function get_idkamar($kamar){
 		$this->load->model('kamar');
 		$this->kamar->lihatkamar();
-		foreach($get_kamar->result() as $row){
+		foreach($kamar->result() as $row){
 			$kamar = $row->id_kamar;
 		}
-		$get_kamar = $this->kamar->lihat_isikamar($kamar);
+		$kamar = $this->kamar->lihat_isikamar($kamar);
 	}
 
     public function lihatkamar(){		
 		$this->load->model('kamar');
-
 		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
-		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();		
-		
+		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();	
+		$data['bobot'] = $this->kamar->bobot($kamar)->result();
+
 		$this->load->view('lihatkamar', $data);
 	}	
 

@@ -67,5 +67,15 @@ class Kamar extends CI_Model {
                     INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar='$kamar'"); 
         return $query;     
     }
+
+    public function bobot($kamar){
+        $query = $this->db->query("SELECT
+                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'SF' then 1 else 0 end) as SF,
+                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'ST' then 1 else 0 end) as ST,
+                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NT' then 1 else 0 end) as NT,
+                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NF' then 1 else 0 end) as NF
+                    FROM tbisikamar i JOIN tbhasiltes t ON i.id_penghuni = t.id_penghuni WHERE i.id_kamar = '$kamar'");
+        return $query;               
+    }
 }
 ?>

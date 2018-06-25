@@ -92,36 +92,31 @@
                 <td><?php echo $row->nama_kamar;?></td>
                 <td><?php echo $row->total;?>/4</td>
                 <?php
-                    $query_bobot=mysqli_query($db,"SELECT
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'SF' then 1 else 0 end) as SF,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'ST' then 1 else 0 end) as ST,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NT' then 1 else 0 end) as NT,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NF' then 1 else 0 end) as NF
-                    FROM tbisikamar i JOIN tbhasiltes t ON i.id_penghuni = t.id_penghuni WHERE i.id_kamar = '$id_kamar'");
+                    
 
                     $no2 = 1;
-                    $bobot = 0;
-                    while($row2=mysqli_fetch_array($query_bobot))
+                    $bobotkamar = 0;
+                    foreach($bobot as $row2)
                     {
-                      $SF=$row2['SF'];
-                      $ST=$row2['ST'];
-                      $NF=$row2['NF'];
-                      $NT=$row2['NT'];
+                      $SF=$row2->SF;
+                      $ST=$row2->ST;
+                      $NF=$row2->NF;
+                      $NT=$row2->NT;
 
                       if($ST == 2 && $SF == 2 || $ST == 2 && $NT == 2 || $SF == 2 && $NF == 2 || $NF == 2 && $NT == 2){
-                        $bobot = 2;
+                        $bobotkamar = 2;
                       }else if($ST == 1 && $SF == 3 || $ST == 3 && $SF == 1
                             || $ST == 1 && $NT == 3 || $ST == 3 && $NT == 1
                             || $SF == 1 && $NF == 3 || $SF == 3 && $NF == 1
                             || $NF == 1 && $NT == 3 || $NF == 3 && $NT == 1
                             || $ST == 4 || $SF == 4 || $NT == 4 || $NF == 4){
-                        $bobot = 1;
+                        $bobotkamar = 1;
                       }else{
-                        $bobot = "-";
+                        $bobotkamar = "-";
                       }
                 ?>
 
-                <td><?php echo $bobot;?></td>
+                <td><?php echo $bobotkamar;?></td>
                   <?php
                   $no2++;
                     }

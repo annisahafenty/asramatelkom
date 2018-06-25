@@ -29,7 +29,9 @@ class Admin extends CI_Controller {
     }    
 
     public function detailnilai(){
-        $this->load->view('detailnilai');
+        $this->load->model('dashboard');
+        $data['nilai'] = $this->dashboard->get_datapenghuni()->result();	
+		$this->load->view('detailnilai', $data);
     }    
     
     public function upload_file(){
