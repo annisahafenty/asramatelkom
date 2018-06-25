@@ -8,13 +8,10 @@ class Asrama extends CI_Controller {
 		foreach($get_kamar->result() as $row){
 			$kamar = $row->id_kamar;
 		}
-
 		$get_kamar = $this->kamar->lihat_isikamar($kamar);
-
 	}
 
     public function lihatkamar(){		
-		// $this->output->enable_profiler(TRUE);
 		$this->load->model('kamar');
 
 		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
