@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Asrama extends CI_Controller {
     public function lihatkamar(){
+		
+		$this->output->enable_profiler(TRUE);
 		$this->load->view('lihatkamar');
     }
 
