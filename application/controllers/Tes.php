@@ -288,7 +288,15 @@ class Tes extends CI_Controller {
 		$this->load->view('hasiltes', $data);
 
 		$this->output->enable_profiler(TRUE);
-	}   
+	}  
+	
+	public function lihatdatakepribadian(){
+		$this->load->model('user');
+		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
+		$data['kepribadian'] = $this->user->get_datakepribadian()->result();
+		
+		$this->load->view('datakepribadian', $data);
+	}
 }
 
 ?>

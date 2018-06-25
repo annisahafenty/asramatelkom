@@ -1,53 +1,4 @@
 <!DOCTYPE html>
-<?php
- session_start();
-  include ("inc/koneksi.php");
-  // error_reporting(0);
-  try{
-    $dbcon=new PDO("mysql:host={$hostname};dbname={$db_name}",$username,$password);
-    $dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  }catch(PDOException $ex){
-    die($ex->getMessage());
-  }
-  $stmt=$dbcon->prepare("SELECT `tipe_kepribadian`, COUNT(tipe_kepribadian) AS jumlahtipe FROM `tbhasiltes` GROUP by `tipe_kepribadian`");
-  $stmt->execute();
-  $jsontipe=[];
-  $jsonjumlahtipe=[];
-
-  while ($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-    extract($row);
-    $tipe_kepribadian=$row['tipe_kepribadian'];
-    $jumlahtipe = $row['jumlahtipe'];
-    $jsontipe[]=$tipe_kepribadian;
-    $jsonjumlahtipe[]=$jumlahtipe;
-  }
-
-?>
-
-<?php
-  try{
-    $dbcon=new PDO("mysql:host={$hostname};dbname={$db_name}",$username,$password);
-    $dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  }catch(PDOException $ex){
-    die($ex->getMessage());
-  }
-  $stmt2=$dbcon->prepare("SELECT `jenis_kelamin`, COUNT(jenis_kelamin) AS jumlahjk FROM `tbpenghuni` GROUP by `jenis_kelamin`");
-  $stmt2->execute();
-  $jsonjk=[];
-  $jsonjumlahjk=[];
-
-  while ($row2=$stmt2->fetch(PDO::FETCH_ASSOC)){
-    extract($row2);
-    $jenis_kelamin=$row2['jenis_kelamin'];
-    $jumlahjk = $row2['jumlahjk'];
-    $jsonjk[]=$jenis_kelamin;
-    $jsonjumlahjk[]=$jumlahjk;
-  }
-
-}
-  }
-?>
-</style>
 <html>
 <head>
   <title>Admin Page</title>
@@ -81,13 +32,13 @@
       </div>
       <!--Menu Sidenav-->
       <li class="active"><a href="#"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="admin_uploadfile.php"><i class="material-icons">file_upload</i>Upload File</a></li>      
-      <li class="white"><a href="admin_soal.php"><i class="material-icons">assignment</i>Soal MBTI</a></li>
-      <li class="white"><a href="admin_datagedung.php"><i class="material-icons">business</i>Data Gedung</a></li>
-      <li class="white"><a href="admin_datakamar.php"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
-      <li class="white"><a href="admin_datapenghuni.php"><i class="material-icons">people</i>Data Penghuni</a></li>
-      <li class="white"><a href="admin_detailnilai.php"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
-      <li class="white"><a href="inc/admin_logout.php"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/upload_file"><i class="material-icons">file_upload</i>Upload File</a></li>      
+      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/detailnilai"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/home/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
@@ -100,15 +51,14 @@
         <div class="row">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="info-box">
-              <img src="images/logo-asrama.jpg" class="info-box-icon">
+              <img src="<?php echo base_url();?>images/logo-asrama.jpg" class="info-box-icon">
               <div class="info-box-content">
                 <span class="info-box-text">Gedung Asrama</span>
         						<?php
-                      $jumlah_gedung = 0;
-        						  $qry = mysqli_query($db,"SELECT COUNT(id_gedung) FROM tbgedung");
-        						        while($row = mysqli_fetch_array($qry)){
-                              $jumlah_gedung = $row[0];
-                            }
+                      $jumlah_gedung = 0;        						  
+        						    foreach($tbgedung as $row){
+                          $jumlah_gedung = $row[0];
+                        }
                 		?>
                 <span class="info-box-number"><?php echo $jumlah_gedung;?><small> Gedung</small></span>
               </div>
@@ -116,7 +66,7 @@
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="info-box">
-              <img src="images/logo-kamar.jpg" class="info-box-icon">
+              <img src="<?php echo base_url();?>images/logo-kamar.jpg" class="info-box-icon">
               <div class="info-box-content">
                 <span class="info-box-text">Kamar Asrama</span>
 
@@ -133,7 +83,7 @@
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="info-box">
-              <img src="images/logo-penghuni.jpg" class="info-box-icon">
+              <img src="<?php echo base_url();?>images/logo-penghuni.jpg" class="info-box-icon">
               <div class="info-box-content">
                 <span class="info-box-text">Penghuni Asrama</span>
                 <?php
@@ -149,6 +99,12 @@
           </div>
         </div>
     <!--Chart Personalites-->
+    <?php
+        foreach($data as $data){
+            $jsontipe[] = $data->tipe_kepribadian;
+            $jsonjumlahtipe[] = $data->jumlahtipe;
+        }
+    ?>
     <div class="row">
       <div class="col s12">
         <div class="card"> <!--warna-->

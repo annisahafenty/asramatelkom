@@ -31,7 +31,7 @@
         </div>
       </div>
       <!--Menu Sidenav-->
-      <li class="white"><a href="<?php echo site_url();?>/home/datakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/tes/lihatdatakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
       <li class="active"><a href="#"><i class="material-icons">content_paste</i>Lihat Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/home/user_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>

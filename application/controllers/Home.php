@@ -23,7 +23,7 @@ class Home extends CI_Controller {
 		if($query->num_rows()>0){
 			$newdata = array(
 				'username'  => $username,
-				'password'     => $password,
+				'password'  => $password,
 				'logged_in' => TRUE
 			);
 			$this->session->set_userdata($newdata);
@@ -33,6 +33,11 @@ class Home extends CI_Controller {
 			redirect('home/loginadmin');
 		}
 	}
+
+	public function admin_logout(){
+		$this->session->sess_destroy();
+		redirect('home/loginadmin');
+	}		
 
 	public function user_login(){
 		$this->output->enable_profiler(TRUE);
