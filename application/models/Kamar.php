@@ -31,10 +31,10 @@ class Kamar extends CI_Model {
         return $query;
     }
 
-    public function cek_kriteria($tipekepribadian_penghuni){
+    public function cek_kriteria($tipekepribadian_penghuni,$id_kamar_isi_kamar){
         $tipe_kepribadian = $_SESSION['tipe_kepribadian'];
         $query = $this->db->query("SELECT * FROM tbkriteria k WHERE k.kriteria1 LIKE SUBSTR('$tipe_kepribadian',2,2) AND k.kriteria2 IN
-            (SELECT SUBSTR('$tipekepribadian_penghuni',2,2) FROM tbisikamar i JOIN tbhasiltes h ON  i.id_penghuni = h.id_penghuni WHERE i.id_kamar = '$id_kamar_isi_kamar'");
+                                    (SELECT SUBSTR('$tipekepribadian_penghuni',2,2) FROM tbisikamar i JOIN tbhasiltes h ON  i.id_penghuni = h.id_penghuni WHERE i.id_kamar = '$id_kamar_isi_kamar')");
         return $query;
     }
 
@@ -64,7 +64,7 @@ class Kamar extends CI_Model {
         $query = $this->db->query("SELECT * FROM tbpenghuni
                     INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
                     INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
-                    INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar=$kamar");
+                    INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar='$kamar'"); 
         return $query;            
     }
 }

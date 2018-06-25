@@ -2,16 +2,26 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Asrama extends CI_Controller {
-    public function lihatkamar(){
-		
-		$this->output->enable_profiler(TRUE);
+	public function get_idkamar($kamar){
+		$this->load->model('kamar');
+		$this->kamar->lihatkamar();
+		foreach($get_kamar->result() as $row){
+			$kamar = $row->id_kamar;
+		}
+
+		$get_kamar = $this->kamar->lihat_isikamar($kamar);
+
+	}
+
+    public function lihatkamar(){		
+		// $this->output->enable_profiler(TRUE);
 		$this->load->model('kamar');
 
 		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
-		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();
+		$data['tbisikamar'] = $this->kamar->lihat_isikamar($kamar)->result();		
 		
 		$this->load->view('lihatkamar', $data);
-    }
+	}	
 
     public function pengelompokan(){		
 		$id_mahasiswa = $_SESSION['id_mahasiswa'];
@@ -39,10 +49,13 @@ class Asrama extends CI_Controller {
 
                             //QUERY LOOPING PENGHUNI
 							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
-							$row_hasil_tes = $result_hasil_tes->result();
-							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
-							
-							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
+							foreach($result_hasil_tes->result_array() as $row_hasil_tes){
+								$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
+							}
+							// $row_hasil_tes = $result_hasil_tes->result();
+							// $tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
+							// echo $tipekepribadian_penghuni;
+							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni,$id_kamar_isi_kamar);
 
                     		foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
@@ -67,8 +80,6 @@ class Asrama extends CI_Controller {
                    		continue;
                 	}
 				}
-				
-
 			}else{
 				$result_kamar_laki = $this->kamar->get_datakamarlakilaki();
 

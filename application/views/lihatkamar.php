@@ -48,7 +48,7 @@
         <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
         <p><?php echo $row->nama_gedung;?></p>
         <p>Lantai <?php $string= $row->nama_kamar; echo $firstCharacter=$string[0];?></p>
-        <p>Kamar <?php echo $kamar = $row->nama_kamar;?></p>
+        <p>Kamar <?php echo $row->nama_kamar;?></p> 
         <?php }?>
         <table class="responsive-table">
           <thead>
@@ -63,12 +63,8 @@
 
           <tbody>
             <?php
-            $this->load->kamar();
-            $this->kamar->lihat_isikamar($kamar);
-            
             $no = 1;
-            foreach($tbisikamar as $row)
-            {
+            foreach($tbisikamar as $row){
             ?>
             <td><?php echo $row->nama_penghuni;?></td>
             <td><?php echo $row->kota;?></td>
