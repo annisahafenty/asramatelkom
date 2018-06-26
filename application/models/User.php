@@ -4,7 +4,7 @@ class User extends CI_Model {
     public function get_user($username, $password){
         $query = $this->db->query("SELECT * FROM tbpenghuni WHERE username = '$username' AND password = '$password'");
         return $query;
-    }   
+    }
 
     public function get_hasiltes(){
         $id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
