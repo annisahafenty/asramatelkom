@@ -39,14 +39,14 @@ class Kamar extends CI_Model {
     }
 
     public function input_penghuniperempuan($id_kamar_perempuan){
-        $id_mahasiswa = $_SESSION['id_mahasiswa'];
-        $query = $this->db->query("INSERT INTO tbisikamar (id_kamar, id_penghuni) VALUES ($id_kamar_perempuan, $id_mahasiswa)");
+        $id_mahasiswa = $this->session->userdata['login']['id_mahasiswa'];
+        $query = $this->db->query("INSERT IGNORE INTO tbisikamar (id_kamar, id_penghuni) VALUES ($id_kamar_perempuan, $id_mahasiswa)");
         return $query;
     }
 
     public function input_penghunilaki($id_kamar_laki){
-        $id_mahasiswa = $_SESSION['id_mahasiswa'];
-        $query = $this->db->query("INSERT INTO tbisikamar (id_kamar, id_penghuni) VALUES ($id_kamar_laki, $id_mahasiswa)");
+        $id_mahasiswa = $this->session->userdata['login']['id_mahasiswa'];
+        $query = $this->db->query("INSERT IGNORE INTO tbisikamar (id_kamar, id_penghuni) VALUES ($id_kamar_laki, $id_mahasiswa)");
         return $query;
     }
 
@@ -61,11 +61,18 @@ class Kamar extends CI_Model {
     }
 
     public function lihat_isikamar($kamar){
-        $query = $this->db->query("SELECT * FROM tbpenghuni
-                    INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
-                    INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
-                    INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbkamar.id_kamar=$kamar");
-        return $query;
+        // $query = $this->db->query("SELECT * FROM tbpenghuni
+        //             INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni
+        //             INNER JOIN tbisikamar ON tbisikamar.id_penghuni=tbhasiltes.id_penghuni
+        //             INNER JOIN tbkamar ON tbisikamar.id_kamar=tbkamar.id_kamar WHERE tbisikamar.id_kamar='$kamar'");
+        // return $query;
+        $this->db->select('*'); //memeilih semua field
+        $this->db->from('tbisikamar'); //memeilih tabel
+        $this->db->join('tbpenghuni', 'tbisikamar.id_penghuni = tbpenghuni.id_penghuni');
+        $this->db->join('tbkamar', 'tbisikamar.id_kamar = tbkamar.id_kamar');
+        $this->db->join('tbhasiltes', 'tbpenghuni.id_penghuni = tbhasiltes.id_penghuni');
+        $this->db->where('tbisikamar.id_kamar',$kamar);
+        return $this->db->get()->result();
     }
 }
 ?>

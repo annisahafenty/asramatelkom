@@ -42,8 +42,8 @@
       <div class="section no-pad-bot" id="index-banner">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
         <?php
-        foreach($tbkamar as $row) {        
-          
+        foreach($tbkamar as $row) {
+
         ?>
         <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
         <p><?php echo $row->nama_gedung;?></p>
@@ -63,13 +63,16 @@
 
           <tbody>
             <?php
-            $this->load->kamar();
-            $this->kamar->lihat_isikamar($kamar);
-            
+            // $this->load->kamar();
+            // $this->models->lihat_isikamar($kamar);
+            // $id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
+            // echo $id_penghuni;
             $no = 1;
-            foreach($tbisikamar as $row)
+            foreach($isi_kamar as $row)
             {
             ?>
+            <tr>
+
             <td><?php echo $row->nama_penghuni;?></td>
             <td><?php echo $row->kota;?></td>
             <td><?php echo $row->program_studi;?></td>
