@@ -9,35 +9,7 @@ class Home extends CI_Controller {
 
 	public function login(){
 		$this->load->view('login');
-	}
-
-	public function loginadmin(){
-		$this->load->view('loginadmin');
-	}
-	
-	public function admin_login(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');	
-		$this->load->model('user');
-		$query = $this->user->get_admin($username, $password);
-		if($query->num_rows()>0){
-			$newdata = array(
-				'username'  => $username,
-				'password'  => $password,
-				'logged_in' => TRUE
-			);
-			$this->session->set_userdata($newdata);
-			$this->load->view('dashboard');
-		}else{
-			$this->session->set_flashdata('warning', 'gagal');
-			redirect('home/loginadmin');
-		}
-	}
-
-	public function admin_logout(){
-		$this->session->sess_destroy();
-		redirect('home/loginadmin');
-	}		
+	}	
 
 	public function user_login(){
 		$this->output->enable_profiler(TRUE);

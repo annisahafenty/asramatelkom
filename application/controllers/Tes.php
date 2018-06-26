@@ -286,22 +286,11 @@ class Tes extends CI_Controller {
 		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
 		$data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();	
 		$this->load->view('hasiltes', $data);
+
 		$this->output->enable_profiler(TRUE);
-<<<<<<< HEAD
 	}
     
     
-=======
-	}  
-	
-	public function lihatdatakepribadian(){
-		$this->load->model('user');
-		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
-		$data['kepribadian'] = $this->user->get_datakepribadian()->result();
-		
-		$this->load->view('datakepribadian', $data);
-	}
->>>>>>> 712146fd46749760874b2ff2438492730131f8f3
 }
 
 ?>
