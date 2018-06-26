@@ -80,7 +80,7 @@
                 $no = 1;
                 $numbering=1;
 
-                foreach($penghuni as $row)
+                foreach($nilai as $row)
                 {
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
