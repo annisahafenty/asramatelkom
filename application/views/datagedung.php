@@ -39,7 +39,7 @@
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/detailnilai"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/home/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
@@ -53,10 +53,10 @@
         <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
         <!--Table Data Gedung-->
         <div class="pmd-card pmd-z-depth pmd-card-custom-view">
-        <form method="GET" action =''>
+        <!-- <form method="GET" action =''>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="laki-laki" name="laki-laki">Gedung Laki-Laki</button></a>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="perempuan" name="perempuan">Gedung Perempuan</button></a>
-        </form>
+        </form> -->
         <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
           <div class="table-responsive">
             <table id="tabelgedung" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
@@ -84,7 +84,7 @@
                 <td><?php echo $row->nama_gedung;?></td>
                 <td><?php echo $row->tipe_gedung;?></td>
                 <td>
-                  <a href="admin_editdatagedung.php?id=<?php echo $row->id_gedung; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Edit</button></a>
+                  <a href="<?php echo site_url();?>/admin/editgedung?id=<?php echo $row->id_gedung; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Edit</button></a>
                 </td>
                 </tr>
                 <?php

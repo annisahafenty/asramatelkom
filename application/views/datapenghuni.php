@@ -56,7 +56,7 @@
           <div class="table-responsive">
           <a href="inc/print_datapenghuni.php" target="_blank"><button class="right btn waves-effect grey darken-4" type="button">Print<i class="material-icons right">local_printshop</i></button></a>
           <div class="vc_empty_space" style="height: 15px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        
+
             <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
             <table id="tabelpenghuni" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
               <thead>
@@ -71,12 +71,12 @@
                 </tr>
               </thead>
               <tbody>
-                <?php                
+                <?php
                 $no = 1;
                 $numbering=1;
 
                 foreach($penghuni as $row)
-                
+
                 {
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
@@ -113,6 +113,18 @@
                 		}
                 	  }
                 	}
+              </script>
+              <script type="text/javascript"> //script print
+                function PrintDiv() {
+                     var divToPrint = document.getElementById('divtoprint');
+                     var divToPrint1 = document.getElementById('divtoprint1');
+                     var divToPrint2 = document.getElementById('divtoprint2');
+                     var divToPrint3 = document.getElementById('divtoprint3');
+                     var popupWin = window.open('', '_blank');
+                     popupWin.document.open();
+                     popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + divToPrint1.innerHTML + divToPrint2.innerHTML  + divToPrint3.innerHTML+ '</html>');
+                     popupWin.document.close();
+                }
               </script>
             </table>
           </div>

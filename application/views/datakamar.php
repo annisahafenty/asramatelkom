@@ -39,7 +39,7 @@
       <li class="active"><a href="#"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/detailnilai"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/home/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
@@ -112,7 +112,7 @@
                       if($ST == 2 && $SF == 2 || $ST == 2 && $NT == 2 || $SF == 2 && $NF == 2 || $NF == 2 && $NT == 2){
                         $bobot = 2;
 =======
-                    
+
 
                     $no2 = 1;
                     $bobotkamar = 0;

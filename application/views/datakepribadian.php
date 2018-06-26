@@ -44,7 +44,7 @@
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
 
         <?php
-        foreach($kepribadian as $row){       
+        foreach($kepribadian as $row){
         ?>
 
         <h2>Tipe Kepribadian Saya - <?php echo $row->tipe_kepribadian;?></h2>
@@ -70,7 +70,7 @@
             <?php }?>
         </div>
         <?php
-          foreach($kepribadian as $row){       
+          foreach($kepribadian as $row){
         ?>
         <h3>Deskripsi</h3>
         <p><?php echo $row->keterangan;?></p>
