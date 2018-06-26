@@ -14,10 +14,10 @@ class Tes extends CI_Controller {
 		$data['soal_sn'] = $this->soal->get_soal_sn()->result();
 		$data['soal_tf'] = $this->soal->get_soal_tf()->result();
 		$data['soal_jp'] = $this->soal->get_soal_jp()->result();
-
+		
 		$this->load->view('tesmbti', $data);
     }
-
+    
     public function hasil_tesmbti(){
 		$answer1 = $this->input->post('ei_1');
 		$answer2 = $this->input->post('ei_2');
@@ -34,7 +34,7 @@ class Tes extends CI_Controller {
 		$answer13 = $this->input->post('ei_13');
 		$answer14 = $this->input->post('ei_14');
 		$answer15 = $this->input->post('ei_15');
-
+		
 		$totalE = 0;
 
 		if ($answer1 == "A") { $totalE++; }
@@ -86,7 +86,7 @@ class Tes extends CI_Controller {
 		$answer28 = $this->input->post('sn_13');
 		$answer29 = $this->input->post('sn_14');
 		$answer30 = $this->input->post('sn_15');
-
+		
 		$totalS = 0;
 
 		if ($answer16 == "A") { $totalS++; }
@@ -138,7 +138,7 @@ class Tes extends CI_Controller {
 		$answer43 = $this->input->post('tf_13');
 		$answer44 = $this->input->post('tf_14');
 		$answer45 = $this->input->post('tf_15');
-
+		
 		$totalT = 0;
 
 		if ($answer31 == "A") { $totalT++; }
@@ -190,7 +190,7 @@ class Tes extends CI_Controller {
 		$answer58 = $this->input->post('jp_13');
 		$answer59 = $this->input->post('jp_14');
 		$answer60 = $this->input->post('jp_15');
-
+		
 		$totalJ = 0;
 
 		if ($answer46 == "A") { $totalJ++; }
@@ -244,58 +244,64 @@ class Tes extends CI_Controller {
 		$data['persenJ'] = $persenJ;
 		$persenP=($totalP/15)*100;
 		$data['persenP'] = $persenP;
-
+		
 		if ($persenE>$persenI) {
 			$hasil1="E";
 		}else{
 			$hasil1="I";
 		}
-
+		
 		if ($persenS>$persenN) {
 			$hasil2="S";
 		}else{
-			$hasil2="N";
+			$hasil2="N";			
 		}
 
 		if ($persenT>$persenF) {
 			$hasil3="T";
 		}else{
-			$hasil3="F";
+			$hasil3="F";			
 		}
 
 		if ($persenJ>$persenP) {
 			$hasil4="J";
 		}else{
-			$hasil4="P";
+			$hasil4="P";			
 		}
 
 		$hasil = $hasil1.$hasil2.$hasil3.$hasil4;
-		$this->load->model('soal');
+		$this->load->model('soal');		
 		$id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
 		$query = $this->soal->input_hasiltes($id_penghuni, $totalE, $totalI, $totalS, $totalN, $totalT, $totalF, $totalJ, $totalP, $hasil);
-
+		
 		$this->load->model('user');
 		$get_tipe = $this->user->get_hasiltes();
 		foreach($get_tipe->result() as $row){
 			$tipe_kepribadian = $row->tipe_kepribadian;
 		}
-
+		
 		$this->session->set_userdata('tipe_kepribadian',$tipe_kepribadian);
 
 		$this->load->model('user');
-		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();
-		$data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();
+		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
+		$data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();	
 		$this->load->view('hasiltes', $data);
 		$this->output->enable_profiler(TRUE);
+<<<<<<< HEAD
 	}
-
-
+    
+    
+=======
+	}  
+	
 	public function lihatdatakepribadian(){
 		$this->load->model('user');
-		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();
+		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();	
 		$data['kepribadian'] = $this->user->get_datakepribadian()->result();
-
+		
 		$this->load->view('datakepribadian', $data);
 	}
+>>>>>>> 712146fd46749760874b2ff2438492730131f8f3
+}
 
 ?>

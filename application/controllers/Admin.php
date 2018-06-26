@@ -6,33 +6,37 @@ class Admin extends CI_Controller {
   // $this->load->model('admin');
   // }
 
-  public function loginadmin(){
-    $this->load->view('loginadmin');
-  }
-
-  public function admin_login(){
-    $username = $this->input->post('username');
-		$password = $this->input->post('password');
-		$this->load->model('dashboard');
-		$query = $this->dashboard->get_admin($username, $password);
-		if($query->num_rows()>0){
-			$newdata = array(
-				'username'  => $username,
-				'password'  => $password,
-				'logged_in' => TRUE
-			);
-			$this->session->set_userdata($newdata);
-			$this->load->view('dashboard');
-		}else{
-			$this->session->set_flashdata('warning', 'gagal');
-			redirect('admin/loginadmin');
-		}
-  }
-
-  public function admin_logout(){
-		$this->session->sess_destroy();
-		redirect('admin/loginadmin');
-	}
+  // public function login(){
+  //   $this->load->view('loginadmin');
+  // }
+  //
+  // public function admin_login(){
+  //   $this->output->enable_profiler(TRUE);
+  //   $username = $this->input->post('username');
+  //   $password = $this->input->post('password');
+  //   //$query = $this->db->query("SELECT * FROM tbpenghuni WHERE username = '$username' AND password = '$password'");
+  //   $this->load->model('admin');
+  //   $query = $this->admin->get_user($username, $password);
+  //
+  //
+  //   if($query->num_rows()>0 && $tipe_kepribadian == FALSE){
+  //
+  //     $newdata = array(
+  //       'username'  => $username,
+  //       'password'     => $password,
+  //       'logged_in' => TRUE
+  //     );
+  //     $this->session->set_userdata('login',$newdata);
+  //     $this->load->view('dashboard');
+  //   }else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){
+  //     $this->session->set_userdata($newdata);
+  //     redirect('asrama/lihatkamar');
+  //   }else{
+  //     $this->session->set_flashdata('warning', 'gagal');
+  //
+  //     redirect('home/login');
+  //   }
+  // }
 
     public function dashboard(){
         $this->load->view('dashboard');
