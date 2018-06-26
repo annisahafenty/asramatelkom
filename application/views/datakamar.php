@@ -54,10 +54,10 @@
         <!--Table Data Gedung-->
         <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 
-        <form method="GET" action =''>
+        <!-- <form method="GET" action =''>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="laki-laki" name="laki-laki">Kamar Laki-Laki</button></a>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="perempuan" name="perempuan">Kamar Perempuan</button></a>
-        </form>
+        </form> -->
         <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
 
           <div class="table-responsive">

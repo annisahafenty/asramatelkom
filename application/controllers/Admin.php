@@ -40,10 +40,15 @@ class Admin extends CI_Controller {
     }
 
     public function datagedung(){
-        $query= $this->db->query("SELECT COUNT('id_gedung') FROM tbgedung;");
         $this->load->model('dashboard');
         $data['gedung'] = $this->dashboard->get_datagedung()->result();
 		$this->load->view('datagedung', $data);
+    }
+
+    public function editgedung(){
+        $this->load->model('dashboard');
+        $data['editgedung'] = $this->dashboard->editgedung($id_gedung)->result();
+        $this->load->view('editgedung', $data);
     }
 
     public function datakamar(){

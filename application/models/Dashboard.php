@@ -10,6 +10,10 @@ class Dashboard extends CI_Model {
         $query = $this->db->query("SELECT * FROM tbgedung");
         return $query;
     }
+    public function editgedung($id_gedung){
+        $query = $this->db->query("SELECT * FROM tbgedung WHERE id_gedung='$id_gedung'");
+        return $query;
+    }
 
     public function get_jumlahgedung(){
       $query = $this->db->query("SELECT COUNT(id_gedung) FROM tbgedung;");
