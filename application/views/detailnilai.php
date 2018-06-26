@@ -73,40 +73,14 @@
                   <th>Nilai Feeling</th>
                   <th>Nilai Judging</th>
                   <th>Nilai Perceiving</th>
-<<<<<<< HEAD
-                  <!--<th>Substring</th> -->
-=======
->>>>>>> 712146fd46749760874b2ff2438492730131f8f3
                 </tr>
               </thead>
               <tbody>
                 <?php
-<<<<<<< HEAD
-                $qry = mysqli_query($db,"SELECT * FROM tbpenghuni LEFT JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni");
                 $no = 1;
                 $numbering=1;
 
-                while($row = mysqli_fetch_array($qry))
-                {
-                ?>
-                <td><?php echo $numbering; $numbering++?></td>
-                <td><?php echo $row['nama_penghuni'];?></td>
-                <td><?php echo $row['jenis_kelamin'];?></td>
-                <td><?php echo $row['tipe_kepribadian'];?></td>
-                <td class="center"><?php echo $row['nilai_e'];?></td>
-                <td class="center"><?php echo $row['nilai_i'];?></td>
-                <td class="center"><?php echo $row['nilai_s'];?></td>
-                <td class="center"><?php echo $row['nilai_n'];?></td>
-                <td class="center"><?php echo $row['nilai_t'];?></td>
-                <td class="center"><?php echo $row['nilai_f'];?></td>
-                <td class="center"><?php echo $row['nilai_j'];?></td>
-                <td class="center"><?php echo $row['nilai_p'];?></td>
-                <!-- <td><?php echo substr($row['tipe_kepribadian'],1,2);?></td> -->
-=======
-                $no = 1;
-                $numbering=1;
-
-                foreach($nilai as $row)
+                foreach($penghuni as $row)
                 {
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
@@ -121,7 +95,6 @@
                 <td class="center"><?php echo $row->nilai_f;?></td>
                 <td class="center"><?php echo $row->nilai_j;?></td>
                 <td class="center"><?php echo $row->nilai_p;?></td>
->>>>>>> 712146fd46749760874b2ff2438492730131f8f3
                 </tr>
                 <?php
                   $no++;
@@ -129,19 +102,7 @@
                 ?>
 
               </tbody>
-<<<<<<< HEAD
-              <!-- <script>
-                // JavaScript popup window function
-                	function basicPopup(url) {
-                popupWindow = window.open(url,'popUpWindow','height=700,width=1200,left=,top=50,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
-                	}
-
-              </script> -->
               <script>
-
-=======
-              <script>
->>>>>>> 712146fd46749760874b2ff2438492730131f8f3
                   function mySearchFunction() {
                 	  var input, filter, table, tr, td, i;
                 	  input = document.getElementById("myInput");

@@ -2,9 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Admin extends CI_Controller {
-  // public function __construct(){
-  // $this->load->model('admin');
-  // }
 
   public function loginadmin(){
     $this->load->view('loginadmin');
@@ -52,13 +49,15 @@ class Admin extends CI_Controller {
     public function datakamar(){
         $this->load->model('dashboard');
         $data['kamar'] = $this->dashboard->get_datakamar()->result();
+        $data['bobot'] = $this->dashboard->bobot($kamar)->result();
 		$this->load->view('datakamar', $data);
     }
 
     public function datapenghuni(){
         $this->load->model('dashboard');
         $data['penghuni'] = $this->dashboard->get_datapenghuni()->result();
-		$this->load->view('datapenghuni', $data);
+        $this->load->view('datapenghuni', $data);
+        $this->load->view('detailnilai', $data);
     }
 
     public function detailnilai(){
@@ -68,5 +67,6 @@ class Admin extends CI_Controller {
     public function upload_file(){
         $this->load->view('uploadfile');
     }
+
 }
 ?>
