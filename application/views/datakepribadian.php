@@ -1,36 +1,4 @@
 <!DOCTYPE html>
-<?php
-    $id_mahasiswa = $_SESSION['id_mahasiswa']; 
-
-    $nama_penghuni= $row['nama_penghuni'];
-    $program_studi=$row['program_studi'];
-
-  //utk konten dari lihat hasil button
-  $qryid= "SELECT * FROM tbhasiltes WHERE id_penghuni = '$id_penghuni'";
-  $resultid = mysqli_query($db,$qryid);
-  $rowid = mysqli_fetch_array($resultid);
-  $tipe_kepribadian = $rowid['tipe_kepribadian']; //get hasil tipe Kepribadian
-
-
-  $totalE = $rowid['nilai_e'];
-  $totalI = $rowid['nilai_i'];
-  $totalS = $rowid['nilai_s'];
-  $totalN = $rowid['nilai_n'];
-  $totalT = $rowid['nilai_t'];
-  $totalF = $rowid['nilai_f'];
-  $totalJ = $rowid['nilai_j'];
-  $totalP = $rowid['nilai_p'];
-
-  $persenE=($totalE/15)*100;
-  $persenI=($totalI/15)*100;
-  $persenS=($totalS/15)*100;
-  $persenN=($totalN/15)*100;
-  $persenT=($totalT/15)*100;
-  $persenF=($totalF/15)*100;
-  $persenJ=($totalJ/15)*100;
-  $persenP=($totalP/15)*100;
-
-?>
 <html>
 <head>
   <title>Tipe Kepribadian</title>
@@ -60,13 +28,13 @@
         </div>
         <div class="pull-left info">
 
-          <p>Hello, <?php echo $username;  ?>!</p>
+          <p>Hello, <?php echo $_SESSION['username']; ?>!</p>
         </div>
       </div>
       <!--Menu Sidenav-->
       <li class="active"><a href="#"><i class="material-icons">stars</i>Data Kepribadian</a></li>
-      <li class="white"><a href="user_lihatkamar.php"><i class="material-icons">content_paste</i>Lihat Kamar</a></li>
-      <li class="white"><a href="inc/user_logout.php"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/asrama/lihatkamar"><i class="material-icons">content_paste</i>Lihat Kamar</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/home/user_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
@@ -76,42 +44,39 @@
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
 
         <?php
-        $query2 = "SELECT * FROM tbpenghuni INNER JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni INNER JOIN tbtipekepribadian ON tbtipekepribadian.tipe_kepribadian=tbhasiltes.tipe_kepribadian WHERE tbpenghuni.id_penghuni=$id_penghuni;";
-        $result2 = mysqli_query($db, $query2);
-        $row2 = mysqli_fetch_assoc($result2);
+        foreach($kepribadian as $row){       
         ?>
 
-        <h2>Tipe Kepribadian Saya - <?php echo $row2['tipe_kepribadian'];?></h2>
+        <h2>Tipe Kepribadian Saya - <?php echo $row->tipe_kepribadian;?></h2>
         <br>
-        <p>Nama : <?php echo $nama_penghuni; ?> </p>
-        <p>Jurusan : <?php echo $program_studi; ?> </p>
-
+        <p>Nama : <?php echo $row->nama_penghuni; ?> </p>
+        <p>Jurusan : <?php echo $row->program_studi; ?> </p>
+        <?php }?>
         <div class="chart" style="padding:0; margin:0;"><!--chart-->
           <b style="font-size:23px;">Skor :</b>
 
         </div>
         <div class="left container" style="width:40%; ">
             <div id="stackedchart_values" style="header:none;"></div>
-            <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Extrovert : <?php echo $totalE;?> (<?php echo round($persenE,0);?>%) &nbsp Introvert : <?php echo $totalI;?> (<?php echo round($persenI,0);?>%)</p> <!--hasil dari tes bukan diagram-->
-            <div id="stackedchart_values2" style=""></div>
-            <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Sensing : <?php echo $totalS;?> (<?php echo round($persenS,0);?>%) &nbsp Intuitive : <?php echo $totalN;?> (<?php echo round($persenN,0);?>%)</p>
-            <div id="stackedchart_values3" style=""></div>
-            <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Thinking : <?php echo $totalT;?> (<?php echo round($persenT,0);?>%) &nbsp Feeling : <?php echo $totalF;?> (<?php echo round($persenF,0);?>%)</p>
-            <div id="stackedchart_values4" style=""></div>
-            <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Judging : <?php echo $totalJ;?> (<?php echo round($persenJ,0);?>%) &nbsp Perceiving : <?php echo $totalP;?> (<?php echo round($persenP,0);?>%)</p>
-            <br>
+            <?php foreach ($tbhasiltes as $row){ ?>
+                <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Extrovert : <?php echo $row->nilai_e;?> (<?php echo round($persenE,0);?>%) &nbsp Introvert : <?php echo $row->nilai_i;?> (<?php echo round($persenI,0);?>%)</p> <!--hasil dari tes bukan diagram-->
+                <div id="stackedchart_values2"></div>
+                <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Sensing : <?php echo $row->nilai_s;?> (<?php echo round($persenS,0);?>%) &nbsp Intuitive : <?php echo $row->nilai_n;?> (<?php echo round($persenN,0);?>%)</p>
+                <div id="stackedchart_values3"></div>
+                <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Thinking : <?php echo $row->nilai_t;?> (<?php echo round($persenT,0);?>%) &nbsp Feeling : <?php echo $row->nilai_f;?> (<?php echo round($persenF,0);?>%)</p>
+                <div id="stackedchart_values4"></div>
+                <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Judging : <?php echo $row->nilai_j;?> (<?php echo round($persenJ,0);?>%) &nbsp Perceiving : <?php echo $row->nilai_p;?> (<?php echo round($persenP,0);?>%)</p>
+                <br>
+            <?php }?>
         </div>
-
+        <?php
+          foreach($kepribadian as $row){       
+        ?>
         <h3>Deskripsi</h3>
-        <p><?php echo $row2['keterangan'];?></p>
+        <p><?php echo $row->keterangan;?></p>
         <h3>Partner</h3>
-        <p><?php echo $row2['partner1'];?> dan <?php echo $row2['partner2'];?></p>
-        <!-- <h3>Deskripsi</h3>
-        <p><?php echo $row2['keterangan'];?></p>
-        <h3>Deskripsi</h3>
-        <p><?php echo $row2['keterangan'];?></p>
-        <h3>Deskripsi</h3>
-        <p><?php echo $row2['keterangan'];?></p> -->
+        <p><?php echo $row->partner1;?> dan <?php echo $row->partner2;?></p>
+        <?php }?>
       </div>
       <div class="right" id="divnottoprint" style="padding:25px;">
         <a href="" target="_blank" onclick="PrintDiv()"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Cetak Hasil Tes</button></a>
