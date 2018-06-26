@@ -59,16 +59,11 @@
                       $jumlah_gedung = 0;
         						    foreach($tbgedung as $row){
                           $jumlah_gedung = $row[0];
-                        }
                 		?>
                 <span class="info-box-number"><?php echo $jumlah_gedung;?><small> Gedung</small></span>
 
-                      // $jml = 0;
-        						    foreach($jmlgedung as $row){
-                          // $jml = $row[0];
-                		?>
-                <span class="info-box-number"><?php echo $row->jml;?><small> Gedung</small></span>
                 <?php }?>
+
               </div>
             </div>
           </div>
