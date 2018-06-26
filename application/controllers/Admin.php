@@ -68,5 +68,35 @@ class Admin extends CI_Controller {
     public function upload_file(){
         $this->load->view('uploadfile');
     }
+
+    // public function soal_ei(){
+    //   $this->load->view('soalei');
+    // }
+    public function soal_ei(){
+
+    $query = $this->Soal->get_soal_ei();
+    $data['soal_ei'] = null;
+    if($query){
+     $data['soal_ei'] =  $query;
+    }
+
+      $this->load->view('soalei.php', $data);
+    }
+
+    public function soal_sn(){
+      $this->load->view('soalsn');
+    }
+
+    public function soal_tf(){
+      $this->load->view('soaltf');
+    }
+
+    public function soal_jp(){
+      $this->load->view('soaljp');
+    }
+
+    public function tipe_kepribadian(){
+      $this->load->view('deskripsi');
+    }
 }
 ?>

@@ -45,7 +45,36 @@
   <!--Content Tetap Ditengah-->
     <div class="container">
       <!--Padding Atas Content-->
+      <div class="section no-pad-bot" id="index-banner">
+        <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
+        <h3>Edit Soal </h3>
+        <!-- <button class="btn pmd-btn-raised pmd-ripple-effect btn-info" style><a href="print.php" style="color:white;">Cetak Data</a></button>-->
+        <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
+        <table id="soal" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+          <tr><th>No.</th>
+              <th>Soal Thinking</th>
+              <th>Soal Feeling</th> <!--baru diubah-->
+              <th></th>
 
+          </tr>
+
+        <?php
+        foreach ($soal_tf as $row) {
+
+        ?>
+        <td><?php echo $row->id; ?></td>
+        <td><?php echo $row->soal_t;?></td>
+        <td><?php echo $row->soal_f;?></td><!--baru diubah-->
+        <td> <!--baru diubah-->
+          <a href="admin_editsoaltesei.php?id=<?php echo $row['idsoal_ei']; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">Edit</button></a> <!--untuk soal e-->
+        </td>
+        </tr>
+
+        <?php
+        }
+        ?>
+        </table>
+      </div>
     </div>
   </main>
 </body>

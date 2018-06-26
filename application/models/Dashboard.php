@@ -21,9 +21,19 @@ class Dashboard extends CI_Model {
         return $query;
     }
 
+    public function get_jumlahkamar(){
+      $query = $this->db->query("SELECT COUNT(id_kamar) FROM tbkamar;");
+      return $query->result();
+    }
+
     public function get_datapenghuni(){
         $query = $this->db->query("SELECT * FROM tbpenghuni LEFT JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni");
         return $query;
+    }
+
+    public function get_jumlahpenghuni(){
+      $query = $this->db->query("SELECT COUNT(id_penghuni) FROM tbpenghuni;");
+      return $query->result();
     }
 }
 ?>

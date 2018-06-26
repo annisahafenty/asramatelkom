@@ -37,7 +37,7 @@
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_sn"><i class="material-icons">assignments</i>Soal Sensing & Intuitive</a></li>
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_tf"><i class="material-icons">assignments</i>Soal Thinking & Feeling</a></li>
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_jp"><i class="material-icons">assignments</i>Soal Judgment & Perceiving</a></li>
-      <li class ="white"><a href="<?php echo site_url();?>/admin/tipe_kepribadian"><i class="material-icons">assignments</i>Deskripsi</a></li>
+      <li class ="white"><a href="<?php echo site_url();?>/admin/deskripsi"><i class="material-icons">assignments</i>Deskripsi</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
@@ -45,7 +45,36 @@
   <!--Content Tetap Ditengah-->
     <div class="container">
       <!--Padding Atas Content-->
+      <div class="section no-pad-bot" id="index-banner">
+        <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
+        <h3>Edit Soal </h3>
+        <!-- <button class="btn pmd-btn-raised pmd-ripple-effect btn-info" style><a href="print.php" style="color:white;">Cetak Data</a></button>-->
+        <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
+        <table id="soal" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+          <tr><th>No.</th>
+              <th>Soal Judging</th>
+              <th>Soal Perceiving</th> <!--baru diubah-->
+              <th></th>
 
+          </tr>
+
+        <?php
+        foreach ($soal_jp as $row) {
+
+        ?>
+        <td><?php echo $row->id; ?></td>
+        <td><?php echo $row->soal_j;?></td>
+        <td><?php echo $row->soal_p;?></td><!--baru diubah-->
+        <td> <!--baru diubah-->
+          <a href="admin_editsoaltesei.php?id=<?php echo $row['idsoal_ei']; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">Edit</button></a> <!--untuk soal e-->
+        </td>
+        </tr>
+
+        <?php
+        }
+        ?>
+        </table>
+      </div>
     </div>
   </main>
 </body>

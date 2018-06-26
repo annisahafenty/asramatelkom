@@ -55,12 +55,12 @@
               <div class="info-box-content">
                 <span class="info-box-text">Gedung Asrama</span>
         						<?php
-                      // $jumlah_gedung = 0;
+                      $jumlah_gedung = 0;
         						    foreach($tbgedung as $row){
-                          // $jumlah_gedung = $row[0];
+                          $jumlah_gedung = $row[0];
                         }
                 		?>
-                <span class="info-box-number"><?php echo $this->db->get_jumlahgedung()->result();?><small> Gedung</small></span>
+                <span class="info-box-number"><?php echo $jumlah_gedung;?><small> Gedung</small></span>
               </div>
             </div>
           </div>
