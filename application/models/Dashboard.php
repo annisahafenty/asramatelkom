@@ -1,11 +1,6 @@
 <?php
 class Dashboard extends CI_Model {
 
-    public function get_admin($username, $password){
-        $query = $this->db->query("SELECT * FROM tbadmin WHERE username = '$username' AND password = '$password'");
-        return $query;
-    }
-
     public function get_datagedung(){
         $query = $this->db->query("SELECT * FROM tbgedung");
         return $query;

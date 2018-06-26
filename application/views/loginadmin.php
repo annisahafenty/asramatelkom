@@ -27,7 +27,7 @@
         <div class="card card-panel loginbox blue-grey lighten-5">
           <h5 class="center card-title">Log In Admin</h5>
           <!--Form-->
-              <form action="<?php echo site_url();?>/home/loginadmin" method="POST">
+              <form action="<?php echo site_url();?>/home/admin_login" method="POST">
                 <div class="row">
                   <div class="input-field col s12">
                     <input id="username" type="text" class="validate" name="username">
