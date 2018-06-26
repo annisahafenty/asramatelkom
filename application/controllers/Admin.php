@@ -84,30 +84,28 @@ class Admin extends CI_Controller {
         $this->load->view('uploadfile');
     }
 
-    // public function soal_ei(){
-    //   $this->load->view('soalei');
-    // }
     public function soal_ei(){
-
-    $query = $this->Soal->get_soal_ei();
-    $data['soal_ei'] = null;
-    if($query){
-     $data['soal_ei'] =  $query;
-    }
-
-      $this->load->view('soalei.php', $data);
+        $this->load->model('dashboard');
+        $data['soal_ei'] = $this->dashboard->get_soal_ei()->result();
+        $this->load->view('soalei', $data);
     }
 
     public function soal_sn(){
-      $this->load->view('soalsn');
+        $this->load->model('dashboard');
+        $data['soal_sn'] = $this->dashboard->get_soal_sn()->result();
+        $this->load->view('soalsn', $data);
     }
 
     public function soal_tf(){
-      $this->load->view('soaltf');
+        $this->load->model('dashboard');
+        $data['soal_tf'] = $this->dashboard->get_soal_tf()->result();
+        $this->load->view('soaltf', $data);
     }
 
     public function soal_jp(){
-      $this->load->view('soaljp');
+        $this->load->model('dashboard');
+        $data['soal_jp'] = $this->dashboard->get_soal_jp()->result();
+        $this->load->view('soaljp', $data);
     }
 
     public function tipe_kepribadian(){

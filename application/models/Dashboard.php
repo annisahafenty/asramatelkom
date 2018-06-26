@@ -51,5 +51,24 @@ class Dashboard extends CI_Model {
         return $query;
     }
 
+    public function get_soal_ei(){
+        $query = $this->db->query("SELECT * FROM soal_ei");
+        return $query;
+    }
+
+    public function get_soal_sn(){
+        $query = $this->db->query("SELECT * FROM soal_sn");
+        return $query;
+    }
+
+    public function get_soal_tf(){
+        $query = $this->db->query("SELECT * FROM soal_tf");
+        return $query;
+    }
+
+    public function get_soal_jp(){
+        $query = $this->db->query("SELECT * FROM soal_jp");
+        return $query;
+    }
 }
 ?>
