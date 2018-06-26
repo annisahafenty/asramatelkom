@@ -79,8 +79,8 @@
           <?php }?>
           <?php
             foreach ($tbtipekepribadian as $row){
-            
-          ?>              
+
+          ?>
           <div class="right-sidebar grey lighten-2">
             <div class="col" id="divtoprint3">
               <b style="font-size:23px;">Deskripsi :</b><br><br> <!--Call deskripsi jawaban-->
@@ -91,6 +91,7 @@
             </div>
             <?php }?>
               <div class="right" style="padding-right:10px; padding-bottom:10px;">
+                <button class="right btn waves-effect grey darken-4" type="button" onclick="window.print()">Print<i class="material-icons right">local_printshop</i></button>
                 <div class="">
                   <a href="<?php echo site_url();?>/asrama/pengelompokan"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Lihat Kamar</button></a>
                 </div>
