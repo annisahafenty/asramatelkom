@@ -45,7 +45,7 @@
                 <?php foreach($soal_ei as $row) {?>
                   <div>
                   <label for="e_<?php echo $row->id;?>">
-                    <input class="with-gap" type="radio" name="ei_<?php echo $row->id;?>" id="e_<?php echo $row->id;?>" value="A" required checked/>
+                    <input class="with-gap" type="radio" name="ei_<?php echo $row->id;?>" id="e_<?php echo $row->id;?>" value="A" required/>
                       <span>
                         <?php echo $row->soal_e;?>
                       </span>
@@ -54,15 +54,15 @@
 
                   <div>
                   <label for="i_<?php echo $row->id;?>">
-                    <input class="with-gap" type="radio" name="ei_<?php echo $row->id;?>" id="i_<?php echo $row->id;?>" value="B" required />
+                    <input class="with-gap" type="radio" name="ei_<?php echo $row->id;?>" id="i_<?php echo $row->id;?>" value="B" required/>
                       <span>
                         <?php echo $row->soal_i;?>
                       </span>
                   </label>
-                  </div>
+                  </div>                        
                   <hr>
                 <?php }?>
-                <hr>
+                <hr>    
                 <!-- SN -->
                 <?php foreach($soal_sn as $row) {?>
                   <div>
@@ -76,12 +76,12 @@
 
                   <div>
                   <label for="n_<?php echo $row->id;?>">
-                    <input class="with-gap" type="radio" name="sn_<?php echo $row->id;?>" id="n_<?php echo $row->id;?>" value="B" required checked/>
+                    <input class="with-gap" type="radio" name="sn_<?php echo $row->id;?>" id="n_<?php echo $row->id;?>" value="B" required/>
                       <span>
                         <?php echo $row->soal_n;?>
                       </span>
                   </label>
-                  </div>
+                  </div>                        
                   <hr>
                 <?php }?>
                 <hr>
@@ -89,7 +89,7 @@
                 <?php foreach($soal_tf as $row) {?>
                   <div>
                   <label for="t_<?php echo $row->id;?>">
-                    <input class="with-gap" type="radio" name="tf_<?php echo $row->id;?>" id="t_<?php echo $row->id;?>" value="A" required checked/>
+                    <input class="with-gap" type="radio" name="tf_<?php echo $row->id;?>" id="t_<?php echo $row->id;?>" value="A" required/>
                       <span>
                         <?php echo $row->soal_t;?>
                       </span>
@@ -103,15 +103,15 @@
                         <?php echo $row->soal_f;?>
                       </span>
                   </label>
-                  </div>
+                  </div>                        
                   <hr>
                 <?php }?>
-                <hr>
+                <hr> 
                 <!-- JP -->
                 <?php foreach($soal_jp as $row) {?>
                   <div>
                   <label for="j_<?php echo $row->id;?>">
-                    <input class="with-gap" type="radio" name="jp_<?php echo $row->id;?>" id="j_<?php echo $row->id;?>" value="A" required checked/>
+                    <input class="with-gap" type="radio" name="jp_<?php echo $row->id;?>" id="j_<?php echo $row->id;?>" value="A" required/>
                       <span>
                         <?php echo $row->soal_j;?>
                       </span>
@@ -125,11 +125,11 @@
                         <?php echo $row->soal_p;?>
                       </span>
                   </label>
-                  </div>
+                  </div>                        
                   <hr>
                 <?php }?>
-                <input type="submit" name="btnSubmit" value="Lihat Hasil" class="btn btn-primary teal right" style="padding-left:100px; padding-right:100px;">
-              </div>  <!-- row -->
+                <input type="submit" name="btnSubmit" value="Lihat Hasil" class="btn btn-primary teal right" style="padding-left:100px; padding-right:100px;">  
+              </div>  <!-- row -->              
             </form>
           </div>
 

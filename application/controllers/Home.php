@@ -38,7 +38,7 @@ class Home extends CI_Controller {
 				'tipe_kepribadian' => $tipe_kepribadian,
 				'logged_in' => TRUE
 			);
-			$this->session->set_userdata('login',$newdata);
+			$this->session->set_userdata($newdata);
 			$this->load->view('indextes');
 		}else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){	
 			$this->session->set_userdata($newdata);	

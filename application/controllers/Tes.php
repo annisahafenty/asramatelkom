@@ -271,8 +271,8 @@ class Tes extends CI_Controller {
 
 		$hasil = $hasil1.$hasil2.$hasil3.$hasil4;
 		$this->load->model('soal');		
-		$id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
-		$query = $this->soal->input_hasiltes($id_penghuni, $totalE, $totalI, $totalS, $totalN, $totalT, $totalF, $totalJ, $totalP, $hasil);
+		$id_mahasiswa = $_SESSION['id_mahasiswa'];
+		$query = $this->soal->input_hasiltes($id_mahasiswa, $totalE, $totalI, $totalS, $totalN, $totalT, $totalF, $totalJ, $totalP, $hasil);
 		
 		$this->load->model('user');
 		$get_tipe = $this->user->get_hasiltes();
