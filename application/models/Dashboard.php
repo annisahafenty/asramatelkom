@@ -70,5 +70,22 @@ class Dashboard extends CI_Model {
         $query = $this->db->query("SELECT * FROM soal_jp");
         return $query;
     }
+
+    public function editsoalei($id){
+        $query = $this->db->query("SELECT * FROM soal_ei WHERE id='$id'");
+        return $query;
+    }
+    public function editsoalsn($id){
+        $query = $this->db->query("SELECT * FROM soal_sn WHERE id='$id'");
+        return $query;
+    }
+    public function editsoaltf($id){
+        $query = $this->db->query("SELECT * FROM soal_tf WHERE id='$id'");
+        return $query;
+    }
+    public function editsoaljp($id){
+        $query = $this->db->query("SELECT * FROM soal_jp WHERE id='$id'");
+        return $query;
+    }
 }
 ?>

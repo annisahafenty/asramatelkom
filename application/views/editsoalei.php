@@ -37,9 +37,10 @@
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_sn"><i class="material-icons">assignments</i>Soal Sensing & Intuitive</a></li>
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_tf"><i class="material-icons">assignments</i>Soal Thinking & Feeling</a></li>
       <li class ="white"><a href="<?php echo site_url();?>/admin/soal_jp"><i class="material-icons">assignments</i>Soal Judgment & Perceiving</a></li>
-      <li class ="white"><a href="<?php echo site_url();?>/admin/tipe_kepribadian"><i class="material-icons">assignments</i>Deskripsi</a></li>
+      <li class ="white"><a href="<?php echo site_url();?>/admin/deskripsi"><i class="material-icons">assignments</i>Deskripsi</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
+
 
   <!--Content Area-->
   <!--Content Tetap Ditengah-->
@@ -47,33 +48,31 @@
       <!--Padding Atas Content-->
       <div class="section no-pad-bot" id="index-banner">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <h3>Edit Soal </h3>
-        <!-- <button class="btn pmd-btn-raised pmd-ripple-effect btn-info" style><a href="print.php" style="color:white;">Cetak Data</a></button>-->
-        <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <table id="soal" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
-          <tr><th>No.</th>
-              <th>Soal Thinking</th>
-              <th>Soal Feeling</th> <!--baru diubah-->
-              <th></th>
+        <h3>Edit Soal Extrovert & Introvert</h3>
+        <?php
+          $id=$_GET['id'];
+          $query = mysqli_query($db,"SELECT * FROM soal_ei WHERE id='$id'");
+          $row = mysqli_fetch_array ($query);
 
+        ?>
+        <form action="inc/admin_editsoaltesei.php" method="post">
+          <input type="hidden" name="no" value="<?php echo $id ?>" >
+        <table id="soal" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="50%">
+          <tr>
+            <td>Soal Extrovert  : </td>
+            <td><input type="text" name="soal_e" id="soal_e" size="25" type="text" class="validate" value="<?php echo $row['soal_e'];?>"></td>
+          </tr>
+          <tr>
+            <td>Soal Introvert  : </td>
+            <td><input type="text" name="soal_i" id="soal_i" size="25" type="text" class="validate" value="<?php echo $row['soal_i'];?>"></td><!--baru diubah-->
           </tr>
 
-        <?php
-        foreach ($soal_tf as $row) {
-
-        ?>
-        <td><?php echo $row->id; ?></td>
-        <td><?php echo $row->soal_t;?></td>
-        <td><?php echo $row->soal_f;?></td><!--baru diubah-->
-        <td> <!--baru diubah-->
-          <a href="<?php echo site_url();?>/admin/editsoaltf?id=<?php echo $row->id; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">Edit</button></a> <!--untuk soal e-->
-        </td>
-        </tr>
-
-        <?php
-        }
-        ?>
         </table>
+        <div class="row">
+          <div class="col s6">
+            <button class="btn waves-effect grey darken-4" type="submit" name="action" style="float:right">Edit</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>

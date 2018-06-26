@@ -112,5 +112,26 @@ class Admin extends CI_Controller {
       $this->load->view('deskripsi');
     }
 
+    public function editsoalei(){
+        $this->load->model('dashboard');
+        $data['editsoal'] = $this->dashboard->editsoalei($id)->result();
+        $this->load->view('editsoalei', $data);    
+    }
+    public function editsoalsn(){
+        $this->load->model('dashboard');
+        $data['editsoal'] = $this->dashboard->editsoalsn($id)->result();
+        $this->load->view('editsoalsn', $data);    
+    }
+    public function editsoaltf(){
+        $this->load->model('dashboard');
+        $data['editsoal'] = $this->dashboard->editsoaltf($id)->result();
+        $this->load->view('editsoaltf', $data);    
+    }
+    public function editsoaljp(){
+        $this->load->model('dashboard');
+        $data['editsoal'] = $this->dashboard->editsoaljp($id)->result();
+        $this->load->view('editsoaljp', $data);    
+    }
+
 }
 ?>

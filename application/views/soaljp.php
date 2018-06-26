@@ -66,7 +66,7 @@
         <td><?php echo $row->soal_j;?></td>
         <td><?php echo $row->soal_p;?></td><!--baru diubah-->
         <td> <!--baru diubah-->
-          <a href="admin_editsoaltesei.php?id=<?php echo $row->id; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">Edit</button></a> <!--untuk soal e-->
+          <a href="<?php echo site_url();?>/admin/editsoaljp?id=<?php echo $row->id; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">Edit</button></a> <!--untuk soal e-->
         </td>
         </tr>
 
