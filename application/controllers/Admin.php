@@ -45,6 +45,12 @@ class Admin extends CI_Controller {
 		$this->load->view('datagedung', $data);
     }
 
+    public function jumlahgedung(){
+        $this->load->model('dashboard');
+        $data['jmlgedung'] = $this->dashboard->get_jumlahgedung()->result();
+		$this->load->view('dashboard', $data);
+    }
+
     public function editgedung(){
         $this->load->model('dashboard');
         $data['editgedung'] = $this->dashboard->editgedung($id_gedung)->result();
@@ -56,6 +62,10 @@ class Admin extends CI_Controller {
         $data['kamar'] = $this->dashboard->get_datakamar()->result();
         $data['bobot'] = $this->dashboard->bobot($kamar)->result();
 		$this->load->view('datakamar', $data);
+    }
+
+    public function detailkamar(){
+        $this->load->view('detailkamar');
     }
 
     public function datapenghuni(){
