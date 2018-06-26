@@ -11,6 +11,11 @@ class Dashboard extends CI_Model {
         return $query;
     }
 
+    public function get_jumlahgedung(){
+      $query = $this->db->query("SELECT COUNT(id_gedung) FROM tbgedung;");
+      return $query->result();
+    }
+
     public function get_datakamar(){
         $query = $this->db->query("SELECT * FROM tbkamar");
         return $query;
