@@ -76,11 +76,6 @@
               <br>
             </div>
           </div>
-          <?php }?>
-          <?php
-            foreach ($tbtipekepribadian as $row){
-
-          ?>
           <div class="right-sidebar grey lighten-2">
             <div class="col" id="divtoprint3">
               <b style="font-size:23px;">Deskripsi :</b><br><br> <!--Call deskripsi jawaban-->
@@ -118,14 +113,14 @@
           </ul>
           <div class="social-links-wrapper">
             <ul class="social-links">
-                <a href="#">
-                  <img src="images/icon-facebook.png" width="30px" height="30px"></a>
-                <a href="#">
-                  <img src="images/icon-instagram.png" width="30px" height="30px"></a>
-                <a href="#">
-                  <img src="images/icon-twitter.png" width="30px" height="30px"></a>
-                <a href="#">
-                  <img src="images/icon-email.png" width="30px" height="30px"></a>
+              <a href="#">
+                <img src="<?php echo base_url();?>images/icon-facebook.png" width="30px" height="30px"></a>
+               <a href="#">
+                <img src="<?php echo base_url();?>images/icon-instagram.png" width="30px" height="30px"></a>
+              <a href="#">
+                <img src="<?php echo base_url();?>images/icon-twitter.png" width="30px" height="30px"></a>
+              <a href="#">
+                <img src="<?php echo base_url();?>images/icon-email.png" width="30px" height="30px"></a>
             </ul>
           </div>
         </div>

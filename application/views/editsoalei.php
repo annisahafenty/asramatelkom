@@ -51,8 +51,7 @@
         <h3>Edit Soal Extrovert & Introvert</h3>
         <?php
           $id=$_GET['id'];
-          $query = mysqli_query($db,"SELECT * FROM soal_ei WHERE id='$id'");
-          $row = mysqli_fetch_array ($query);
+        foreach ($editsoal as $row) {
 
         ?>
         <form action="inc/admin_editsoaltesei.php" method="post">
@@ -60,13 +59,13 @@
         <table id="soal" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="50%">
           <tr>
             <td>Soal Extrovert  : </td>
-            <td><input type="text" name="soal_e" id="soal_e" size="25" type="text" class="validate" value="<?php echo $row['soal_e'];?>"></td>
+            <td><input type="text" name="soal_e" id="soal_e" size="25" type="text" class="validate" value="<?php echo $row->soal_e;?>"></td>
           </tr>
           <tr>
             <td>Soal Introvert  : </td>
-            <td><input type="text" name="soal_i" id="soal_i" size="25" type="text" class="validate" value="<?php echo $row['soal_i'];?>"></td><!--baru diubah-->
+            <td><input type="text" name="soal_i" id="soal_i" size="25" type="text" class="validate" value="<?php echo $row->soal_i;?>"></td><!--baru diubah-->
           </tr>
-
+        <?php }?>
         </table>
         <div class="row">
           <div class="col s6">

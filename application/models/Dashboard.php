@@ -10,14 +10,14 @@ class Dashboard extends CI_Model {
         $query = $this->db->query("SELECT * FROM tbgedung");
         return $query;
     }
-    public function editgedung($id_gedung){
-        $query = $this->db->query("SELECT * FROM tbgedung WHERE id_gedung='$id_gedung'");
+    public function editgedung($gedung){
+        $query = $this->db->query("SELECT * FROM tbgedung WHERE id_gedung='$gedung'");
         return $query;
     }
 
     public function get_jumlahgedung(){
       $query = $this->db->query("SELECT COUNT(id_gedung) as 'jml' FROM tbgedung");
-      return $query;
+      return $query; 
     }
 
     public function get_datakamar(){
@@ -26,8 +26,8 @@ class Dashboard extends CI_Model {
     }
 
     public function get_jumlahkamar(){
-      $query = $this->db->query("SELECT COUNT(id_kamar) FROM tbkamar;");
-      return $query->result();
+      $query = $this->db->query("SELECT COUNT(id_kamar) as 'jml' FROM tbkamar");
+      return $query;
     }
 
     public function get_datapenghuni(){
@@ -37,8 +37,8 @@ class Dashboard extends CI_Model {
 
 
     public function get_jumlahpenghuni(){
-      $query = $this->db->query("SELECT COUNT(id_penghuni) FROM tbpenghuni;");
-      return $query->result();
+      $query = $this->db->query("SELECT COUNT(id_penghuni) as 'jml' FROM tbpenghuni");
+      return $query;
     }
 
     public function bobot($kamar){

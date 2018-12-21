@@ -44,21 +44,19 @@
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
 
         <?php
-        foreach($kepribadian as $row){
+        foreach($tbhasiltes as $row){
         ?>
 
         <h2>Tipe Kepribadian Saya - <?php echo $row->tipe_kepribadian;?></h2>
         <br>
         <p>Nama : <?php echo $row->nama_penghuni; ?> </p>
         <p>Jurusan : <?php echo $row->program_studi; ?> </p>
-        <?php }?>
         <div class="chart" style="padding:0; margin:0;"><!--chart-->
           <b style="font-size:23px;">Skor :</b>
 
         </div>
         <div class="left container" style="width:40%; ">
             <div id="stackedchart_values" style="header:none;"></div>
-            <?php foreach ($tbhasiltes as $row){ ?>
                 <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Extrovert : <?php echo $row->nilai_e;?> (<?php echo round($persenE,0);?>%) &nbsp Introvert : <?php echo $row->nilai_i;?> (<?php echo round($persenI,0);?>%)</p> <!--hasil dari tes bukan diagram-->
                 <div id="stackedchart_values2"></div>
                 <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Sensing : <?php echo $row->nilai_s;?> (<?php echo round($persenS,0);?>%) &nbsp Intuitive : <?php echo $row->nilai_n;?> (<?php echo round($persenN,0);?>%)</p>
@@ -66,12 +64,8 @@
                 <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Thinking : <?php echo $row->nilai_t;?> (<?php echo round($persenT,0);?>%) &nbsp Feeling : <?php echo $row->nilai_f;?> (<?php echo round($persenF,0);?>%)</p>
                 <div id="stackedchart_values4"></div>
                 <p>&nbsp &nbsp &nbsp &nbsp &nbsp -Judging : <?php echo $row->nilai_j;?> (<?php echo round($persenJ,0);?>%) &nbsp Perceiving : <?php echo $row->nilai_p;?> (<?php echo round($persenP,0);?>%)</p>
-                <br>
-            <?php }?>
+                <br>            
         </div>
-        <?php
-          foreach($kepribadian as $row){
-        ?>
         <h3>Deskripsi</h3>
         <p><?php echo $row->keterangan;?></p>
         <h3>Partner</h3>

@@ -33,13 +33,12 @@
       </div>
       <!--Menu Sidenav-->
       <li class="white"><a href="<?php echo site_url();?>/admin/dashboard"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/upload_file"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
       <li class="active"><a href="#"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/home/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
@@ -54,9 +53,6 @@
         <!--Table Data Gedung-->
         <div class="pmd-card pmd-z-depth pmd-card-custom-view">
           <div class="table-responsive">
-            <form action="inc/export.php" method="post">
-            <a href="inc/print_datapenghuni.php" target="_blank"><button class="right btn waves-effect grey darken-4" type="submit" name="export">Download<i class="material-icons right">file_download</i></button></a>
-            </form>
             <div class="vc_empty_space" style="height: 50px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
             <table id="tabelpenghuni" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
               <thead class="center">
@@ -73,20 +69,15 @@
                   <th>Nilai Feeling</th>
                   <th>Nilai Judging</th>
                   <th>Nilai Perceiving</th>
-
-                  <!--<th>Substring</th> -->
-
-
                 </tr>
               </thead>
               <tbody>
                 <?php
 
-                $qry = mysqli_query($db,"SELECT * FROM tbpenghuni LEFT JOIN tbhasiltes ON tbpenghuni.id_penghuni=tbhasiltes.id_penghuni");
                 $no = 1;
                 $numbering=1;
 
-                while($row = mysqli_fetch_array($qry))
+               foreach($nilai as $row)
                 {
                 ?>
 
@@ -110,14 +101,6 @@
                 ?>
 
               </tbody>
-
-              <!-- <script>
-                // JavaScript popup window function
-                	function basicPopup(url) {
-                popupWindow = window.open(url,'popUpWindow','height=700,width=1200,left=,top=50,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
-                	}
-
-              </script> -->
               <script>
 
                   function mySearchFunction() {

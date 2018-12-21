@@ -7,7 +7,6 @@ class Tes extends CI_Controller {
     }
 
     public function tesmbti(){
-		$this->output->enable_profiler(TRUE);
 		$this->load->model('soal');
 
 		$data['soal_ei'] = $this->soal->get_soal_ei()->result();
@@ -271,8 +270,7 @@ class Tes extends CI_Controller {
 
 		$hasil = $hasil1.$hasil2.$hasil3.$hasil4;
 		$this->load->model('soal');
-		$id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
-		$query = $this->soal->input_hasiltes($id_penghuni, $totalE, $totalI, $totalS, $totalN, $totalT, $totalF, $totalJ, $totalP, $hasil);
+		$query = $this->soal->input_hasiltes($totalE, $totalI, $totalS, $totalN, $totalT, $totalF, $totalJ, $totalP, $hasil);
 
 		$this->load->model('user');
 		$get_tipe = $this->user->get_hasiltes();
@@ -284,18 +282,18 @@ class Tes extends CI_Controller {
 
 		$this->load->model('user');
 		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();
-		$data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();
+		// $data['tbtipekepribadian'] = $this->user->get_kepribadian()->result();
 		$this->load->view('hasiltes', $data);
-		$this->output->enable_profiler(TRUE);
+
 	}
 
 
 	public function lihatdatakepribadian(){
 		$this->load->model('user');
 		$data['tbhasiltes'] = $this->user->get_hasiltes()->result();
-		$data['kepribadian'] = $this->user->get_datakepribadian()->result();
-
+		// $data['kepribadian'] = $this->user->get_kepribadian()->result();
 		$this->load->view('datakepribadian', $data);
 	}
+}
 
 ?>

@@ -33,8 +33,7 @@
       </div>
       <!--Menu Sidenav-->
       <li class="white"><a href="<?php echo site_url();?>/admin/dashboard"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/upload_file"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="active"><a href="#"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
@@ -54,10 +53,10 @@
         <!--Table Data Gedung-->
         <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 
-        <form method="GET" action =''>
+        <!-- <form method="GET" action =''>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="laki-laki" name="laki-laki">Kamar Laki-Laki</button></a>
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="perempuan" name="perempuan">Kamar Perempuan</button></a>
-        </form>
+        </form> -->
         <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
 
           <div class="table-responsive">
@@ -68,7 +67,6 @@
                   <th>Gedung</th>
                   <th>Kamar</th>
                   <th>Jumlah Penghuni</th>
-                  <th>Bobot Kamar</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -82,60 +80,16 @@
 
                 $no = 1;
                 $numbering=1;
-
-                foreach($kamar as $row)
-                {
-                $id_kamar = $row->id_kamar;
+                foreach($kamar as $row){
+                  $id_kamar = $row->id_kamar;
                 ?>
                 <td><?php echo $numbering; $numbering++?></td>
                 <td><?php echo $row->nama_gedung;?></td>
                 <td><?php echo $row->nama_kamar;?></td>
                 <td><?php echo $row->total;?>/4</td>
-                <?php
-
-                    $query_bobot=mysqli_query($db,"SELECT
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'SF' then 1 else 0 end) as SF,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'ST' then 1 else 0 end) as ST,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NT' then 1 else 0 end) as NT,
-                    SUM(case when SUBSTRING(tipe_kepribadian, 2,2) = 'NF' then 1 else 0 end) as NF
-                    FROM tbisikamar i JOIN tbhasiltes t ON i.id_penghuni = t.id_penghuni WHERE i.id_kamar = '$id_kamar'");
-
-                    $no2 = 1;
-                    $bobot = 0;
-                    while($row2=mysqli_fetch_array($query_bobot))
-                    {
-                      $SF=$row2['SF'];
-                      $ST=$row2['ST'];
-                      $NF=$row2['NF'];
-                      $NT=$row2['NT'];
-
-                      if($ST == 2 && $SF == 2 || $ST == 2 && $NT == 2 || $SF == 2 && $NF == 2 || $NF == 2 && $NT == 2){
-                        $bobot = 2;
-
-
-                      }else if($ST == 1 && $SF == 3 || $ST == 3 && $SF == 1
-                            || $ST == 1 && $NT == 3 || $ST == 3 && $NT == 1
-                            || $SF == 1 && $NF == 3 || $SF == 3 && $NF == 1
-                            || $NF == 1 && $NT == 3 || $NF == 3 && $NT == 1
-                            || $ST == 4 || $SF == 4 || $NT == 4 || $NF == 4){
-
-                        $bobot = 1;
-                      }else{
-                        $bobot = "-";
-                      }
-                ?>
-
-
-                <td><?php echo $bobotkamar;?></td>
-
-                  <?php
-                  $no2++;
-                    }
-                  ?>
                 <td>
-
-
-                  <a href="admin_lihatdatakamar.php?id=<?php echo $row->id_kamar; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info">View</button></a>
+                  <?php $idkamar = $row->id_kamar;?>  
+                  <a href="<?php echo site_url()?>/admin/detailkamar/<?php echo $idkamar; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-info" name ="idkamar" value="<?php echo $idkamar;?>">View</button></a>
                 </td>
                 </tr>
                 <?php

@@ -33,8 +33,7 @@
       </div>
       <!--Menu Sidenav-->
       <li class="white"><a href="<?php echo site_url();?>/admin/dashboard"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/upload_file"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
       <li class="active"><a href="#"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
@@ -58,7 +57,6 @@
         <a><button type="submit" class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="perempuan" name="perempuan">Gedung Perempuan</button></a>
         </form> -->
         <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-          <div class="table-responsive">
             <table id="tabelgedung" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -84,7 +82,8 @@
                 <td><?php echo $row->nama_gedung;?></td>
                 <td><?php echo $row->tipe_gedung;?></td>
                 <td>
-                  <a href="<?php echo site_url();?>/admin/editgedung?id=<?php echo $row->id_gedung; ?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger">Edit</button></a>
+                <?php $gedung = $row->id_gedung;?> 
+                  <a href="<?php echo site_url();?>/admin/editgedung/<?php echo $gedung;?>"><button type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-danger" name ="idgedung" value="<?php echo $gedung;?>">Edit</button></a>
                 </td>
                 </tr>
                 <?php

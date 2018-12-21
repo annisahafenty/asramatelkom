@@ -6,17 +6,15 @@
   <link type="text/css" rel="stylesheet" href='<?php echo base_url();?>css/materialize.css'>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>css/custom.css"  media="screen,projection"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--Script untuk Chart-->
+  <!-- Script untuk Chart -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
 </head>
 <body>
   <!--Navbar-->
   <main>
   <div class="navbar-fixed">
-    <nav class=" red darken-3">
-    </nav>
+    <nav class=" red darken-3"></nav>
   </div>
     <!--Sidenav, belum responsive-->
     <ul class="side-nav fixed">
@@ -31,7 +29,7 @@
         </div>
       </div>
       <!--Menu Sidenav-->
-      <li class="white"><a href="<?php echo site_url();?>/home/datakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/tes/lihatdatakepribadian"><i class="material-icons">stars</i>Data Kepribadian</a></li>
       <li class="active"><a href="#"><i class="material-icons">content_paste</i>Lihat Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/home/user_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
@@ -39,60 +37,57 @@
   <!--Content Area-->
   <!--Content Tetap Ditengah-->
     <div class="container">
-      <div class="section no-pad-bot" id="index-banner">
+      <div class="section no-pad-bot" id="divtoprint">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <?php
-        foreach($tbkamar as $row) {
-
-        ?>
-        <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
-        <p><?php echo $row->nama_gedung;?></p>
-        <p>Lantai <?php $string= $row->nama_kamar; echo $firstCharacter=$string[0];?></p>
-        <p>Kamar <?php echo $kamar = $row->nama_kamar;?></p>
-        <?php }?>
-        <table class="responsive-table">
+          <?php
+          foreach($tbkamar as $row) {
+          ?>
+          <h3>Kamar <?php echo substr($row->nama_gedung,7,8);?>-<?php echo $row->nama_kamar;?></h3>
+          <p><?php echo $row->nama_gedung;?></p>
+          <p>Lantai <?php $string= $row->nama_kamar; echo $firstCharacter=$string[0];?></p>
+          <p>Kamar <?php echo $kamar = $row->nama_kamar;?></p>
+          <?php }?>
+          <table class="responsive-table">
           <thead>
             <tr>
-                <th>Nama</th>
-                <th>Asal Daerah</th>
-                <th>Program Studi</th>
-                <th>Nomor Handphone</th>
-                <th>Tipe Kepribadian</th>
+              <th>Nama</th>
+              <th>Asal Daerah</th>
+              <th>Program Studi</th>
+              <th>Nomor Handphone</th>
+              <th>Tipe Kepribadian</th>
             </tr>
           </thead>
-
           <tbody>
-            <?php
-            // $this->load->kamar();
-            // $this->models->lihat_isikamar($kamar);
-            // $id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
-            // echo $id_penghuni;
+            <?php            
             $no = 1;
-            foreach($isi_kamar as $row)
-            {
+            foreach($isi_kamar as $row){ 
             ?>
             <tr>
-
-            <td><?php echo $row->nama_penghuni;?></td>
-            <td><?php echo $row->kota;?></td>
-            <td><?php echo $row->program_studi;?></td>
-            <td><?php echo $row->nomor_hp;?></td>
-            <td><?php echo $row->tipe_kepribadian;?></td>
-
+              <td><?php echo $row->nama_penghuni;?></td>
+              <td><?php echo $row->kota;?></td>
+              <td><?php echo $row->program_studi;?></td>
+              <td><?php echo $row->nomor_hp;?></td>
+              <td><?php echo $row->tipe_kepribadian;?></td>  
             </tr>
             <?php
-              $no++;
-            }
+              $no++;}
             ?>
           </tbody>
-        </table>
-        <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <button class="btn waves-effect grey darken-4" type="submit" name="action">Print<i class="material-icons right">local_printshop</i>
-        </button>
+          </table>
+        <div class="vc_empty_space" style="height: 30px" id="divnottoprint"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
+        <a href="" target="_blank" onclick="PrintDiv()"><button type="button" class="btn waves-effect grey darken-4">Print<i class="material-icons right">local_printshop</i></button></a>
+      </div>
       </div>
     </div>
-    </div>
-    </main>
-
+  </main>
+    <script type="text/javascript"> //script print
+      function PrintDiv() {
+           var divToPrint = document.getElementById('divtoprint');
+           var popupWin = window.open('', '_blank');
+           popupWin.document.open();
+           popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+           popupWin.document.close();
+      }
+    </script>
 </body>
 </html>

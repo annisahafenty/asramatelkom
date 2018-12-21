@@ -33,20 +33,19 @@
       </div>
       <!--Menu Sidenav-->
       <li class="white"><a href="<?php echo site_url();?>/admin/dashboard"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/uploadfile"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="active"><a href="#"><i class="material-icons">people</i>Data Penghuni</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/detailnilai"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/home/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/admin/admin_logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 
   <!--Content Area-->
   <!--Content Tetap Ditengah-->
     <div class="container">
       <!--Padding Atas Content-->
-      <div class="section no-pad-bot" id="index-banner">
+      <div class="section no-pad-bot" id="divtoprint">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
         <input type="text"  id="myInput" onkeyup="mySearchFunction()" placeholder="Cari Penghuni" style="width:30%;height:40px;float: right;">
         <h3>Data Penghuni</h3>
@@ -54,7 +53,9 @@
         <!--Table Data Gedung-->
         <div class="pmd-card pmd-z-depth pmd-card-custom-view">
           <div class="table-responsive">
-          <button class="right btn waves-effect grey darken-4" type="button" onclick="window.print()">Print<i class="material-icons right">local_printshop</i></button>
+          <div class="right" id="divnottoprint" style="padding:25px;">
+            <a href="" target="_blank" onclick="PrintDiv()"><button type="button" class="right btn waves-effect grey darken-4">Print<i class="material-icons right">local_printshop</i></button></a>
+          </div>
           <div class="vc_empty_space" style="height: 15px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
             <div class="vc_empty_space" style="height: 30px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
             <table id="tabelpenghuni" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
@@ -93,7 +94,6 @@
 
               </tbody>
               <script>
-
                   function mySearchFunction() {
                 	  var input, filter, table, tr, td, i;
                 	  input = document.getElementById("myInput");
@@ -114,14 +114,13 @@
                 	}
               </script>
               <script type="text/javascript"> //script print
-                function PrintDiv() {
-                     var divToPrint = document.getElementById('tabelpenghuni');
-                     // var divToPrint1 = document.getElementById('tabelpenghuni');
-                     var popupWin = window.open('', '_blank');
-                     popupWin.document.open();
-                     popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML'</html>');
-                     popupWin.document.close();
-                }
+              function PrintDiv() {
+                var divToPrint = document.getElementById('divtoprint');
+                var popupWin = window.open('', '_blank');
+                popupWin.document.open();
+                popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+                popupWin.document.close();
+              }
               </script>
             </table>
           </div>

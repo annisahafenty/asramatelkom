@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<?php
+foreach($tipe as $row){
+  $tipe_kepribadian[]=$row->tipe_kepribadian;
+  $jumlahtipe[] = $row->jumlahtipe;
+}
+?>
+<?php
+$jsonjk=[];
+$jsonjumlahjk=[];
+
+foreach($jk as $row2){
+  $jenis_kelamin=$row2->jenis_kelamin;
+  $jumlahjk = $row2->jumlahjk;
+  $jsonjk[]=$jenis_kelamin;
+  $jsonjumlahjk[]=$jumlahjk;
+}
+?>
 <html>
 <head>
   <title>Admin Page</title>
@@ -15,8 +32,7 @@
   <!--Navbar-->
   <main>
   <div class="navbar-fixed">
-    <nav class=" red darken-3">
-    </nav>
+    <nav class=" red darken-3"></nav>
   </div>
     <!--Sidenav, belum responsive-->
     <ul class="side-nav fixed">
@@ -32,8 +48,7 @@
       </div>
       <!--Menu Sidenav-->
       <li class="active"><a href="#"><i class="material-icons">home</i>Home</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/upload_file"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/soal"><i class="material-icons">assignment</i>Soal MBTI</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
@@ -55,15 +70,9 @@
               <div class="info-box-content">
                 <span class="info-box-text">Gedung Asrama</span>
         						<?php
-
-                      $jumlah_gedung = 0;
-        						    foreach($tbgedung as $row){
-                          $jumlah_gedung = $row[0];
+        						    foreach($jmlgedung as $row){                          
                 		?>
-                <span class="info-box-number"><?php echo $jumlah_gedung;?><small> Gedung</small></span>
-
-                <?php }?>
-
+                <span class="info-box-number"><?php echo $row->jml;}?><small> Gedung</small></span>                   
               </div>
             </div>
           </div>
@@ -72,15 +81,10 @@
               <img src="<?php echo base_url();?>images/logo-kamar.jpg" class="info-box-icon">
               <div class="info-box-content">
                 <span class="info-box-text">Kamar Asrama</span>
-
                     <?php
-                      $jumlah_kamar = 0;
-                    	$qry = mysqli_query($db,"SELECT COUNT(id_kamar) FROM tbkamar");
-                    				while($row = mysqli_fetch_array($qry)){
-                              $jumlah_kamar = $row[0];
-                            }
+                      foreach($jmlkamar as $row){
                     ?>
-                <span class="info-box-number"><?php echo $jumlah_kamar;?><small> Kamar</small></span>
+                <span class="info-box-number"><?php echo $row->jml;}?><small> Kamar</small></span>                
               </div>
             </div>
           </div>
@@ -90,24 +94,14 @@
               <div class="info-box-content">
                 <span class="info-box-text">Penghuni Asrama</span>
                 <?php
-                  $jumlah_penghuni = 0;
-                  $qry = mysqli_query($db,"SELECT COUNT(id_penghuni) FROM tbpenghuni");
-                        while($row = mysqli_fetch_array($qry)){
-                          $jumlah_penghuni = $row[0];
-                        }
-                ?>
-                <span class="info-box-number"><?php echo $jumlah_penghuni;?><small> Mahasiswa</small></span>
+                  foreach($jmlpenghuni as $row){
+                ?>                
+                <span class="info-box-number"><?php echo $row->jml;}?><small> Mahasiswa</small></span>                
               </div>
             </div>
           </div>
         </div>
     <!--Chart Personalites-->
-    <?php
-        foreach($data as $data){
-            $jsontipe[] = $data->tipe_kepribadian;
-            $jsonjumlahtipe[] = $data->jumlahtipe;
-        }
-    ?>
     <div class="row">
       <div class="col s12">
         <div class="card"> <!--warna-->
@@ -119,7 +113,7 @@
                 var dataChart = new Chart (barChart,{
                   type:'bar',
                   data:{
-                    labels: <?php echo json_encode($jsontipe);?>,
+                    labels: <?php echo json_encode($tipe_kepribadian);?>,
                     datasets:[{
                       backgroundColor:[
                       'rgba(105, 105, 105, 0.6)',
@@ -139,7 +133,7 @@
                       'rgba(255, 182, 193, 0.6)',
                       'rgba(205, 92, 92, 0.6)'
                     ],
-                      data: <?php echo json_encode($jsonjumlahtipe);?>,
+                      data: <?php echo json_encode($jumlahtipe);?>,
                     }]
                   },
                   options: {

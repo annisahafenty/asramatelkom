@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Page - Upload File</title>
+  <title>Admin Page</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href='<?php echo base_url();?>css/materialize.css'>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>css/custom.css"  media="screen,projection"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+<script>
+    $(document).ready(function(){
+    $('select').formSelect();
+    });
+  </script>
 </head>
 <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -33,8 +37,8 @@
       </div>
       <!--Menu Sidenav-->
       <li class="white"><a href="<?php echo site_url();?>/admin/dashboard"><i class="material-icons">home</i>Home</a></li>
-      <li class="active"><a href="#"><i class="material-icons">file_upload</i>Upload File</a></li>
-      <li class="white"><a href="<?php echo site_url();?>/admin/datagedung"><i class="material-icons">business</i>Data Gedung</a></li>
+      <li class="white"><a href="<?php echo site_url();?>/upload/index"><i class="material-icons">file_upload</i>Upload File</a></li>
+      <li class="active"><a href="#"><i class="material-icons">business</i>Data Gedung</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datakamar"><i class="material-icons">airline_seat_individual_suite</i>Data Kamar</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/datapenghuni"><i class="material-icons">people</i>Data Penghuni</a></li>
       <li class="white"><a href="<?php echo site_url();?>/admin/detailnilai"><i class="material-icons">assessment</i>Nilai Tes Penghuni</a></li>
@@ -47,64 +51,42 @@
       <!--Padding Atas Content-->
       <div class="section no-pad-bot" id="index-banner">
         <div class="vc_empty_space" style="height: 10px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <h3>Upload File Data Penghuni</h3>
+        <h3>Edit Data Gedung</h3>
         <div class="vc_empty_space" style="height: 15px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <!--Table Data Gedung-->
+        <!--Table Tambah Gedung-->
         <div class="row">
-          <div class = "col s6">
-            <p>1. File dalam format .csv<p>
-            <p>2. Data yang dimasukkan (data harus berurutan):</p>
-            <p>Nama, Jenis Kelamin, Jurusan, Nomor HP, Kota, Username dan Password</p>
-          </div>
-          <div class="col s6">
-            <img class="materialboxed" src="<?php echo base_url();?>images/contoh.JPG" width="80%">
-          </div>
-        </div>
-        <div class="vc_empty_space" style="height: 25px"><span class="vc_empty_space_inner"></span></div> <!--Untuk space-->
-        <div class="row">
-        <div class="col s6">
-        <form method="POST" enctype="multipart/form-data" id="import_csv" action="<?php echo site_url();?>/upload/do_upload">
-              <div class="file-field input-field ">
-                <div class="btn">
-                  <span>File</span>
-                  <input type="file" name="csv_file" id="csv_file" required accept=".csv">
-                </div>
-                <div class="file-path-wrapper ">
-                  <input class="file-path validate" type="text" placeholder="Upload Excel File Format CSV Here">                  
-                              
-                </div>
+          <form class="col s12" action="<?php echo site_url();?>/admin/editgedung" method="POST">
+          <?php 
+                foreach($editgedung as $row){                  
+                ?>
+  					<input type="hidden" name="no" value="<?php echo $row->id_gedung ?>">
+            <div class="row">
+              <div class="input-field col s8">
+        
+                <input name ="nama_gedung" id="nama_gedung" type="text" class="validate" style="width:50%" value="<?php echo $row->nama_gedung;?>" required>                
+                <label for="nama_gedung">Nama Gedung</label>
               </div>
-              <div class="row">
-                <div class="col s6">
-                  <button class="btn waves-effect grey darken-4" type="submit" name="import_csv" value="upload" style="float:right">Tambah</button>
-                </div>
-              </div>
-            </form>
             </div>
+            <div class="row">
+              <div class="col s8">
+            <label>Tipe Asrama</label>
+               <select name="tipe_gedung" id="tipe_gedung" class="browser-default" style="width:50%" value="<?php echo $row->tipe_gedung;}?>"required>
+                  <option value = "" disabled selected>Choose One</option>
+                  <option value = "Asrama Laki-Laki">Asrama Laki-Laki</option>
+                  <option value = "Asrama Perempuan">Asrama Perempuan</option>
+               </select>
+             </div>
+            </div>
+            <div class="row">
+              <div class="col s6">
+                <button class="btn waves-effect grey darken-4" type="submit" name="action">Edit</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-      <!-- SCRIPT ZOOM PICTURE -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.materialboxed');
-        var instances = M.Materialbox.init(elems, options);
-    });
-
-    // Or with jQuery
-
-    $(document).ready(function(){
-        function load_data(){
-          $.ajax({
-            url:"<?php echo base_url();?>csv_import/load_data",
-            method:"POST",
-            success:function(data){
-              $('#imported_csv_data').html(data);
-            }
-          })
-        }
-    });
-    </script>
   </main>
+
 </body>
 </html>

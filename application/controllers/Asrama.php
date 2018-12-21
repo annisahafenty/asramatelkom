@@ -1,35 +1,39 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
-class Asrama extends CI_Controller {
-    function __construct(){
-      parent::__construct();
-      $this->load->model('Kamar');
+class Asrama extends CI_Controller {    
+    public function lihatkamar(){		
+		$this->load->model('kamar');
+		$result_id_kamar = $this->kamar->lihatkamar();
+		foreach($result_id_kamar->result_array() as $row){
+			$kamar = $row['id_kamar'];
+		}		
+		$data['tbkamar'] = $this->kamar->lihatkamar()->result();
+		$data['isi_kamar'] = $this->kamar->lihat_isikamar($kamar)->result();
+		$this->load->view('lihatkamar', $data);		
+	}
 
-    }
-
-    public function lihatkamar(){
-      $id_penghuni = $this->session->userdata['login']['id_mahasiswa'];
-      $id_kamar = '23';
-      $id_kamars = $this->Kamar->lihatkamar();
-      // foreach ($id_kamars as $id) {
-      //   $id_kamar = $id->id_kamar;
-      // }
-
-      $data['isi_kamar'] = $this->Kamar->lihat_isikamar($id_kamar);
-      $this->output->enable_profiler(TRUE);
-      $this->load->view('lihatkamar', $data);
-    }
+	public function bobot(){
+		$this->load->model('kamar');
+		$result_id_kamar = $this->kamar->lihatkamar();
+		foreach($result_id_kamar->result_array() as $row){
+			$kamar = $row['id_kamar'];
+		}	
+		$data['bobot'] = $this->kamar->bobot($kamar)->result();
+		$this->load->view('lihatkamar', $data);
+	}
 
     public function pengelompokan(){
-		$id_mahasiswa = $this->session->userdata['login']['id_mahasiswa'];
-		$tipe_kepribadian = $this->session->userdata('tipe_kepribadian');
+		$id_mahasiswa =$_SESSION['id_mahasiswa'];
+		echo $id_mahasiswa;
+		$tipe_kepribadian = $_SESSION['tipe_kepribadian'];
+		echo $tipe_kepribadian;
 		$jenis_kelamin = $_SESSION['jenis_kelamin'];
+		echo $jenis_kelamin;
         $this->load->model('kamar');
 		$result_kamar = $this->kamar->get_datakamar();
 
 		if($result_kamar->num_rows() > 0 ){
-
 			if ($jenis_kelamin=='Perempuan'){
     			$result_kamar_perempuan = $this->kamar->get_datakamarperempuan();
         		foreach($result_kamar_perempuan->result_array() as $row_kamar_perempuan){
@@ -47,10 +51,10 @@ class Asrama extends CI_Controller {
 
                             //QUERY LOOPING PENGHUNI
 							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
-							$row_hasil_tes = $result_hasil_tes->result();
-							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
-
-							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
+							foreach($result_hasil_tes->result_array() as $row_hasil_tes){
+								$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
+								echo $tipekepribadian_penghuni;
+								$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni, $id_kamar_isi_kamar);
 
                     		foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
@@ -61,22 +65,21 @@ class Asrama extends CI_Controller {
                         			break 2;
                       			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
 									$input = $this->kamar->input_penghuniperempuan($id_kamar_perempuan);
-                        			break 3; //EVALUASI
+                        			break 3;
                     			}else{
-                        			break ; //EVALUASI
-                    			}
+                        			break ;
+								}
+							}
                   			} //end while kecocokan
                 		} //end while cek jumlah penghuni
             		}
         			if($is_penghuni == 0 ){
 						$input = $this->kamar->input_penghuniperempuan($id_kamar_perempuan);
-                		break; //evaluasi aja
+                		break;
               		}else{
                    		continue;
                 	}
 				}
-
-
 			}else{
 				$result_kamar_laki = $this->kamar->get_datakamarlakilaki();
 
@@ -84,22 +87,23 @@ class Asrama extends CI_Controller {
             		$jml_cek=0;
             		$jml_kriteria=0;
 					$id_kamar_laki = $row_kamar_laki['id_kamar'];
+					echo $id_kamar_laki;
 
 					$result_isi_kamar = $this->kamar->get_datakamarlaki_isikamar($id_kamar_laki);
 					$jml_orang = $result_isi_kamar->num_rows();
-              		$is_penghuni = $result_isi_kamar->num_rows();
+					$is_penghuni = $result_isi_kamar->num_rows();
 					if ($is_penghuni > 0 && $is_penghuni < 4){
-
                 		foreach($result_isi_kamar->result_array() as $row_isi_kamar){
 							$id_kamar_isi_kamar = $row_isi_kamar['id_kamar'];
 							$id_penghuni_isi_kamar = $row_isi_kamar['id_penghuni'];
 
 							$result_hasil_tes = $this->kamar->get_penghuniisikamar($id_penghuni_isi_kamar);
-							$row_hasil_tes = $result_hasil_tes->result();
-							$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
-
-							$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni);
-
+							
+							foreach($result_hasil_tes->result_array() as $row_hasil_tes){
+								$tipekepribadian_penghuni = $row_hasil_tes['tipe_kepribadian'];
+								echo $tipekepribadian_penghuni;
+								$result_cek = $this->kamar->cek_kriteria($tipekepribadian_penghuni, $id_kamar_isi_kamar);
+							
 							foreach($result_cek->result_array() as $row_cek){
 								$is_kriteria = $row_cek['is_cocok'];
 								$jml_cek++;
@@ -110,16 +114,17 @@ class Asrama extends CI_Controller {
                       				break 2;
                     			}else if($jml_kriteria==$jml_orang && $jml_orang==$jml_cek){
 									$input = $this->kamar->input_penghunilaki($id_kamar_laki);
-									break 3; //EVALUASI
+									break 3;
                     			}else{
-                      				break ; //EVALUASI
-                    			}
+                      				break ;
+								}
+							}
                 			} //end while kecocokan
               			} //end while cek jumlah penghuni
             		}
 					if($is_penghuni == 0 ){
 						$input = $this->kamar->input_penghunilaki($id_kamar_laki);
-						break; //evaluasi aja
+						break; 
             		}else{
                  		continue;
               		}

@@ -3,36 +3,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Admin extends CI_Controller {
 
-  public function loginadmin(){
+  public function login(){
     $this->load->view('loginadmin');
   }
 
   public function admin_login(){
     $username = $this->input->post('username');
-		$password = $this->input->post('password');
-		$this->load->model('dashboard');
-		$query = $this->dashboard->get_admin($username, $password);
-		if($query->num_rows()>0){
-			$newdata = array(
-				'username'  => $username,
-				'password'  => $password,
-				'logged_in' => TRUE
-			);
-			$this->session->set_userdata($newdata);
-			$this->load->view('dashboard');
-		}else{
-			$this->session->set_flashdata('warning', 'gagal');
-			redirect('admin/loginadmin');
-		}
+	$password = $this->input->post('password');
+	$this->load->model('dashboard');
+	$query = $this->dashboard->get_admin($username, $password);
+	if($query->num_rows()>0){
+		$newdata = array(
+			'username'  => $username,
+			'password'  => $password,
+			'logged_in' => TRUE
+		);
+		$this->session->set_userdata($newdata);
+		redirect('admin/dashboard');
+	}else{
+		$this->session->set_flashdata('warning', 'gagal');
+		redirect('admin/login');
+	}
   }
 
-  public function admin_logout(){
+    public function admin_logout(){
 		$this->session->sess_destroy();
-		redirect('admin/loginadmin');
+		redirect('admin/login');
 	}
 
     public function dashboard(){
-        $this->load->view('dashboard');
+        $this->load->model('mgrafik');		
+        $this->load->model('dashboard');
+        $data['tipe'] = $this->mgrafik->get_jml_tipe()->result();
+        $data['jk'] = $this->mgrafik->get_jml_jk()->result();
+        $data['jmlgedung'] = $this->dashboard->get_jumlahgedung()->result();
+        $data['jmlkamar'] = $this->dashboard->get_jumlahkamar()->result();
+        $data['jmlpenghuni'] = $this->dashboard->get_jumlahpenghuni()->result();
+        $this->load->view('dashboard', $data);
     }
 
     public function soal(){
@@ -42,18 +49,14 @@ class Admin extends CI_Controller {
     public function datagedung(){
         $this->load->model('dashboard');
         $data['gedung'] = $this->dashboard->get_datagedung()->result();
-		$this->load->view('datagedung', $data);
-    }
-
-    public function jumlahgedung(){
-        $this->load->model('dashboard');
         $data['jmlgedung'] = $this->dashboard->get_jumlahgedung()->result();
-		$this->load->view('dashboard', $data);
+		$this->load->view('datagedung', $data);
     }
 
     public function editgedung(){
         $this->load->model('dashboard');
-        $data['editgedung'] = $this->dashboard->editgedung($id_gedung)->result();
+        $gedung = $this->uri->segment(3);
+        $data['editgedung'] = $this->dashboard->editgedung($gedung)->result();        
         $this->load->view('editgedung', $data);
     }
 
@@ -64,8 +67,12 @@ class Admin extends CI_Controller {
 		$this->load->view('datakamar', $data);
     }
 
-    public function detailkamar(){
-        $this->load->view('detailkamar');
+    public function detailkamar(){	
+        $this->load->model('kamar');
+        $kamar = $this->uri->segment(3);
+        $data['kamar'] = $this->kamar->datakamar($kamar)->result();
+        $data['isi_kamar'] = $this->kamar->lihat_isikamar($kamar)->result();        
+        $this->load->view('detailkamar', $data);
     }
 
     public function datapenghuni(){
@@ -80,7 +87,7 @@ class Admin extends CI_Controller {
         $this->load->view('detailnilai', $data);
     }
 
-    public function upload_file(){
+    public function index_upload(){
         $this->load->view('uploadfile');
     }
 
@@ -132,6 +139,5 @@ class Admin extends CI_Controller {
         $data['editsoal'] = $this->dashboard->editsoaljp($id)->result();
         $this->load->view('editsoaljp', $data);    
     }
-
 }
 ?>

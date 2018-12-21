@@ -2,10 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 class Home extends CI_Controller {
-	// function __construct(){
-	// 	parent::__construct();
-	// 	$this->load->model('Dashboard');
-	// }
 
 	public function index(){
 		$this->load->view('home');
@@ -15,52 +11,21 @@ class Home extends CI_Controller {
 		$this->load->view('login');
 	}
 
-	// public function loginadmin(){
-	// 	$this->load->view('loginadmin');
-	// }
-	//
-	// public function admin_login(){
-	// 	$username = $this->input->post('username');
-	// 	$password = $this->input->post('password');
-	// 	$this->load->model('user');
-	// 	$query = $this->dashboard->get_admin($username, $password);
-	// 	if($query->num_rows()>0){
-	// 		$newdata = array(
-	// 			'username'  => $username,
-	// 			'password'  => $password,
-	// 			'logged_in' => TRUE
-	// 		);
-	// 		$this->session->set_userdata($newdata);
-	// 		$this->load->view('dashboard');
-	// 	}else{
-	// 		$this->session->set_flashdata('warning', 'gagal');
-	// 		redirect('home/loginadmin');
-	// 	}
-	// }
-	//
-	// public function admin_logout(){
-	// 	$this->session->sess_destroy();
-	// 	redirect('home/loginadmin');
-	// }
-
 	public function user_login(){
 		$this->output->enable_profiler(TRUE);
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		//$query = $this->db->query("SELECT * FROM tbpenghuni WHERE username = '$username' AND password = '$password'");
 		$this->load->model('user');
 		$query = $this->user->get_user($username, $password);
-		$get_tipe = $this->user->get_hasiltes();
-		foreach($get_tipe->result() as $row){
-			$tipe_kepribadian = $row->tipe_kepribadian;
-		}
 
-		if($query->num_rows()>0 && $tipe_kepribadian == FALSE){
+		
+		if($query->num_rows()>0){
 			$id_mahasiswa = '';
-
+			$jenis_kelamin = '';
 			foreach ($query->result() as $row){
 				$id_mahasiswa = $row->id_penghuni;
 				$jenis_kelamin = $row->jenis_kelamin;
+				$tipe_kepribadian = $row->tipe_kepribadian;
 			}
 			$newdata = array(
 				'username'  => $username,
@@ -70,14 +35,14 @@ class Home extends CI_Controller {
 				'tipe_kepribadian' => $tipe_kepribadian,
 				'logged_in' => TRUE
 			);
-			$this->session->set_userdata('login',$newdata);
-			$this->load->view('indextes');
-		}else if ($query->num_rows()>0 && $tipe_kepribadian == TRUE){
-			$this->session->set_userdata($newdata);
-			redirect('asrama/lihatkamar');
+			$this->session->set_userdata($newdata);	
+			if($tipe_kepribadian==NULL){
+				redirect('tes/indextes');
+			}else{
+				redirect('asrama/lihatkamar');
+			}			
 		}else{
 			$this->session->set_flashdata('warning', 'gagal');
-
 			redirect('home/login');
 		}
 	}

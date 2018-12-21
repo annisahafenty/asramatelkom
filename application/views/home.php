@@ -14,7 +14,6 @@
     }
 
     h1{
-      font-family: 'Open Sans', sans-serif;
       font-size: 30px;
     }
 
@@ -58,6 +57,7 @@
         <ul class="right hide-on-med-and-down"> <!--Menu Normal-->
           <li class="active"><a href="#">Menu</a></li>
           <li><a href="<?php echo site_url();?>/home/login">Login</a></li>
+          <li><a href="<?php echo site_url();?>/admin/login">Admin</a></li>
         </ul>
         <ul class="side-nav" id="mobile-menu"> <!--Side Nav untuk Mobile-->
           <li class="active"><a href="#">Menu</a></li>
@@ -100,7 +100,7 @@
         </div>
         <div class="row">
           <h5 class="center">Isi Tes</h5>
-          <p class="center">Mengisi tes secara teliti dan benar.</p>
+          <p class="center">Menjawab pertanyaan MBTI (Myers-Briggs type Indicator) yang disediakan secara jujur dan sesuai dengan kepribadian.</p>
         </div>
         </span>
       </div>
